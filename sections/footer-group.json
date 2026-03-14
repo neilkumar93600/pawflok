@@ -1,71 +1,66 @@
 /*
  * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
+ * Footer group — uses pawflok Footer with all pages
  * ------------------------------------------------------------
  */
 {
   "type": "footer",
   "name": "Footer",
   "sections": {
-    "pawflok_footer_iAmJTk": {
+    "pawflok_footer": {
       "type": "pawflok-footer",
       "blocks": {
-        "link_column_b688xT": {
+        "shop_column": {
           "type": "link_column",
           "settings": {
             "heading": "Shop",
-            "menu": "",
-            "manual_links": "All Products | /collections/all\nDog Accessories | /collections/dogs\nCat Accessories | /collections/cats\nSmall Pets | /collections/small-pets\nSale Items | /collections/sale\nNew Arrivals | /collections/new-arrivals"
+            "manual_links": "Home | /\nShop All | /collections/all\nCollections | /collections"
           }
         },
-        "link_column_hQpWKY": {
+        "help_column": {
           "type": "link_column",
           "settings": {
             "heading": "Help",
-            "menu": "",
-            "manual_links": "FAQ | /pages/faq\nShipping & Returns | /pages/shipping-returns\nTrack Your Order | /pages/track-order\nContact Us | /pages/contact-us\nSize Guide | /pages/size-guide"
+            "manual_links": "Contact Us | /pages/contact\nFAQ | /pages/faq\nTrack Order | /pages/track-order\nShipping | /pages/shipping\nReturns | /pages/returns"
           }
         },
-        "link_column_rwBy6B": {
+        "company_column": {
           "type": "link_column",
           "settings": {
             "heading": "Company",
-            "menu": "",
-            "manual_links": "About pawflok | /pages/about-us\nOur Mission | /pages/about-us\nPet Blog | /blogs/news\nSustainability | /pages/sustainability\nWholesale | /pages/wholesale"
+            "manual_links": "About Us | /pages/about"
+          }
+        },
+        "legal_column": {
+          "type": "link_column",
+          "settings": {
+            "heading": "Legal",
+            "manual_links": "Privacy Policy | /policies/privacy-policy\nTerms of Service | /policies/terms-of-service"
           }
         }
       },
       "block_order": [
-        "link_column_b688xT",
-        "link_column_hQpWKY",
-        "link_column_rwBy6B"
+        "shop_column",
+        "help_column",
+        "company_column",
+        "legal_column"
       ],
-      "name": "pawflok Footer",
       "settings": {
         "bg_color": "#111A14",
         "accent_color": "#E8622A",
         "logo_text": "PAW|FOLK",
-        "brand_desc": "Premium pet accessories crafted for comfort, style, and the unconditional love of animals. Trusted by 12,000+ pet families in 35 countries.",
-        "brand_name": "pawflok Ltd",
-        "social_instagram": "",
-        "social_facebook": "",
-        "social_tiktok": "",
-        "social_youtube": "",
-        "social_pinterest": "",
+        "brand_desc": "Premium pet accessories crafted for comfort, style, and the unconditional love of animals. Trusted by 12,000+ pet families across India.",
+        "brand_name": "Pawflok",
         "show_newsletter": true,
-        "nl_label": "Join 40,000+ pet parents",
+        "nl_label": "Join the Pawflok Family",
         "nl_placeholder": "Enter your email",
         "show_trust_row": true,
-        "trust_items": "🚚 Free Shipping over $49, ↩️ 30-Day Returns, 🔒 Secure Checkout, 🧪 Vet Approved, 🏆 1-Year Warranty",
-        "payment_methods": "VISA, MC, AMEX, PayPal, Apple Pay, Klarna"
+        "trust_items": "🚚 Free Shipping over ₹999, ↩️ 7-Day Returns, 🔒 Secure Checkout, 🧪 Vet Approved",
+        "payment_methods": "VISA, MC, AMEX, UPI, PayPal"
       }
     }
   },
   "order": [
-    "pawflok_footer_iAmJTk"
+    "pawflok_footer"
   ]
 }

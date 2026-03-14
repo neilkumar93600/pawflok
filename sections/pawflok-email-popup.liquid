@@ -1,0 +1,351 @@
+{% comment %}
+  pawflok — Email Capture Popup
+  Triggers: time-delay and/or exit-intent
+  Uses localStorage to avoid showing again after dismiss/subscribe
+{% endcomment %}
+
+{% if section.settings.enabled == false %}
+  {% return %}
+{% endif %}
+
+{% capture pf_popup_form %}
+  {%- form 'customer', class: 'pf-email-popup__form', id: 'pf-email-popup-form' -%}
+    <input type="hidden" name="contact[tags]" value="newsletter">
+    <div class="pf-email-popup__input-wrap">
+      <input
+        type="email"
+        name="contact[email]"
+        class="pf-email-popup__input"
+        placeholder="{{ section.settings.placeholder }}"
+        required
+        autocomplete="email"
+        aria-label="Email address"
+      >
+      <button type="submit" class="pf-email-popup__btn">
+        {{ section.settings.btn_text }}
+      </button>
+    </div>
+    {%- if form.posted_successfully? -%}
+      {% assign pf_popup_success = true %}
+      <p class="pf-email-popup__success">{{ section.settings.success_message }}</p>
+      <script>
+        try {
+          localStorage.setItem('pf_email_popup_seen', JSON.stringify({ dismissed: false, subscribed: true }));
+        } catch (e) {}
+      </script>
+    {%- elsif form.errors -%}
+      <p class="pf-email-popup__error">{{ form.errors.translated_fields.email }} {{ form.errors.messages.email }}</p>
+    {%- endif -%}
+  {%- endform -%}
+{% endcapture %}
+
+{% assign pf_popup_success = pf_popup_success | default: false %}
+
+<div
+  id="pf-email-popup"
+  class="pf-email-popup{% if pf_popup_success %} is-visible{% endif %}"
+  data-delay="{{ section.settings.delay_seconds }}"
+  data-exit-intent="{{ section.settings.exit_intent }}"
+  data-storage-key="pf_email_popup_seen"
+  style="{% unless pf_popup_success %}display: none;{% endunless %}"
+  {{ section.shopify_attributes }}
+>
+  <div class="pf-email-popup__backdrop" aria-hidden="true"></div>
+  <div class="pf-email-popup__dialog" role="dialog" aria-modal="true" aria-labelledby="pf-email-popup-heading">
+    <button
+      type="button"
+      class="pf-email-popup__close"
+      aria-label="Close"
+      data-close
+    >
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <div class="pf-email-popup__content">
+      <div class="pf-email-popup__label">{{ section.settings.label }}</div>
+      <h2 id="pf-email-popup-heading" class="pf-email-popup__heading">{{ section.settings.heading }}</h2>
+      <p class="pf-email-popup__subheading">{{ section.settings.subheading }}</p>
+      <div class="pf-email-popup__offer">{{ section.settings.offer }}</div>
+      <p class="pf-email-popup__offer-sub">{{ section.settings.offer_sub }}</p>
+
+      {{ pf_popup_form }}
+
+      <p class="pf-email-popup__disclaimer">{{ section.settings.disclaimer }}</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .pf-email-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .pf-email-popup.is-visible {
+    pointer-events: auto;
+    opacity: 1;
+  }
+  .pf-email-popup__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    cursor: pointer;
+  }
+  .pf-email-popup__dialog {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    width: 90%;
+    max-width: 440px;
+    background: var(--pf-sand, #F7F3EE);
+    border-radius: 16px;
+    padding: 40px 32px;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+  }
+  .pf-email-popup.is-visible .pf-email-popup__dialog {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .pf-email-popup__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--pf-body, #4A5E52);
+    border-radius: 8px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .pf-email-popup__close:hover {
+    background: rgba(0,0,0,0.06);
+    color: var(--pf-ink, #111A14);
+  }
+  .pf-email-popup__label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--pf-coral, #E8622A);
+    margin-bottom: 10px;
+  }
+  .pf-email-popup__heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--pf-ink, #111A14);
+    line-height: 1.2;
+    margin: 0 0 12px;
+  }
+  .pf-email-popup__subheading {
+    font-size: 15px;
+    color: var(--pf-body, #4A5E52);
+    line-height: 1.6;
+    margin: 0 0 16px;
+  }
+  .pf-email-popup__offer {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--pf-coral, #E8622A);
+    margin-bottom: 4px;
+  }
+  .pf-email-popup__offer-sub {
+    font-size: 13px;
+    color: var(--pf-body, #4A5E52);
+    margin: 0 0 24px;
+  }
+  .pf-email-popup__form {
+    margin-bottom: 16px;
+  }
+  .pf-email-popup__input-wrap {
+    display: flex;
+    gap: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1.5px solid rgba(27,58,45,0.2);
+  }
+  .pf-email-popup__input {
+    flex: 1;
+    padding: 14px 18px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    background: #fff;
+  }
+  .pf-email-popup__input::placeholder {
+    color: var(--pf-muted, #8A9E92);
+  }
+  .pf-email-popup__btn {
+    padding: 14px 24px;
+    background: var(--pf-coral, #E8622A);
+    color: #fff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .pf-email-popup__btn:hover {
+    background: var(--pf-coral-light, #F07A45);
+  }
+  .pf-email-popup__success {
+    font-size: 14px;
+    color: var(--pf-forest, #1B3A2D);
+    margin: 12px 0 0;
+  }
+  .pf-email-popup__error {
+    font-size: 13px;
+    color: #c00;
+    margin: 12px 0 0;
+  }
+  .pf-email-popup__disclaimer {
+    font-size: 11px;
+    color: var(--pf-muted, #8A9E92);
+    margin: 0;
+  }
+  @media (max-width: 480px) {
+    .pf-email-popup__input-wrap { flex-direction: column; }
+    .pf-email-popup__btn { width: 100%; }
+  }
+</style>
+
+<script>
+  (function() {
+    const STORAGE_KEY = 'pf_email_popup_seen';
+    const COOKIE_DAYS = 7;
+
+    function getPopover() {
+      return document.getElementById('pf-email-popup');
+    }
+
+    function shouldShow() {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+          const { dismissed, subscribed } = JSON.parse(stored);
+          if (dismissed || subscribed) return false;
+        }
+      } catch (e) {}
+      return true;
+    }
+
+    function markSeen(dismissed, subscribed) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          dismissed: dismissed || false,
+          subscribed: subscribed || false,
+          date: new Date().toISOString()
+        }));
+      } catch (e) {}
+    }
+
+    function showPopup() {
+      const el = getPopover();
+      if (!el || !shouldShow()) return;
+      el.style.display = '';
+      requestAnimationFrame(function() {
+        el.classList.add('is-visible');
+      });
+    }
+
+    function hidePopup(dismissed, subscribed) {
+      const el = getPopover();
+      if (!el) return;
+      el.classList.remove('is-visible');
+      setTimeout(function() {
+        el.style.display = 'none';
+      }, 300);
+      markSeen(dismissed, subscribed);
+    }
+
+    function init() {
+      const el = getPopover();
+      if (!el) return;
+
+      const delay = parseInt(el.dataset.delay || '5', 10) * 1000;
+      const exitIntent = el.dataset.exitIntent === 'true';
+      let shown = false;
+      let timer = null;
+
+      function tryShow() {
+        if (shown || !shouldShow()) return;
+        shown = true;
+        if (timer) clearTimeout(timer);
+        showPopup();
+      }
+
+      if (delay > 0) {
+        timer = setTimeout(tryShow, delay);
+      }
+
+      if (exitIntent) {
+        document.addEventListener('mouseout', function(e) {
+          if (e.clientY < 10 && e.relatedTarget == null) {
+            tryShow();
+          }
+        });
+      }
+
+      el.querySelector('[data-close]')?.addEventListener('click', function() {
+        hidePopup(true, false);
+      });
+      el.querySelector('.pf-email-popup__backdrop')?.addEventListener('click', function() {
+        hidePopup(true, false);
+      });
+
+      const form = el.querySelector('#pf-email-popup-form');
+      if (form) {
+        form.addEventListener('submit', function() {
+          setTimeout(function() {
+            const success = form.querySelector('.pf-email-popup__success');
+            if (success && success.offsetParent !== null) {
+              hidePopup(false, true);
+            }
+          }, 500);
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Email Capture Popup",
+  "settings": [
+    { "type": "checkbox", "id": "enabled", "label": "Enable popup", "default": true },
+    { "type": "range", "id": "delay_seconds", "label": "Show after (seconds)", "min": 3, "max": 30, "step": 1, "default": 5 },
+    { "type": "checkbox", "id": "exit_intent", "label": "Show on exit intent", "default": true },
+    { "type": "text", "id": "label", "label": "Label", "default": "Join the Family" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Get 15% Off Your First Order" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Subscribe for exclusive deals, new arrivals, and pet care tips." },
+    { "type": "text", "id": "offer", "label": "Offer text", "default": "15% OFF" },
+    { "type": "text", "id": "offer_sub", "label": "Offer subtext", "default": "your first order when you join" },
+    { "type": "text", "id": "placeholder", "label": "Email placeholder", "default": "Enter your email" },
+    { "type": "text", "id": "btn_text", "label": "Button text", "default": "Claim Discount" },
+    { "type": "text", "id": "success_message", "label": "Success message", "default": "Thanks! Check your email for your discount code." },
+    { "type": "text", "id": "disclaimer", "label": "Disclaimer", "default": "No spam, ever. Unsubscribe in one click." }
+  ],
+  "presets": [{ "name": "Email Capture Popup" }]
+}
+{% endschema %}

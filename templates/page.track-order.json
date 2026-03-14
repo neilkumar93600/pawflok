@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "track_order_hero": {
+      "type": "pawflok-track-order",
+      "settings": {
+        "label": "Order Status",
+        "heading": "Track Your Order",
+        "subheading": "Enter your order number and email to see real-time delivery status and estimated arrival.",
+        "btn_text": "Track Order",
+        "steps_heading": "How to track",
+        "step1": "Find your order number in the confirmation email we sent you.",
+        "step2": "Click the button above and enter your order number and email.",
+        "step3": "View your order status and tracking details."
+      }
+    }
+  },
+  "order": ["track_order_hero"]
+}

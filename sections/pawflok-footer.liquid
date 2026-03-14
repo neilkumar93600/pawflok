@@ -369,10 +369,18 @@
   <div class="pf-footer-bottom">
     <div class="pf-footer-copy">
       © {{ 'now' | date: '%Y' }} {{ section.settings.brand_name }}. All rights reserved.
-      &nbsp;·&nbsp;
-      <a href="/policies/privacy-policy">Privacy</a>
-      &nbsp;·&nbsp;
-      <a href="/policies/terms-of-service">Terms</a>
+      {%- for policy in shop.policies -%}
+        {%- if policy != blank -%}
+          &nbsp;·&nbsp;
+          <a href="{{ policy.url }}">{{ policy.title }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if shop.policies.size == 0 -%}
+        &nbsp;·&nbsp;
+        <a href="/policies/privacy-policy">Privacy</a>
+        &nbsp;·&nbsp;
+        <a href="/policies/terms-of-service">Terms</a>
+      {%- endif -%}
     </div>
 
     <div class="pf-footer-payments">
