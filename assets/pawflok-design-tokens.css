@@ -1,0 +1,186 @@
+/**
+ * Pawflok Design Tokens
+ * Shared CSS variables and utility classes for consistent branding.
+ * 60% Primary (cream/sand) | 30% Secondary (forest) | 10% Accent (coral)
+ */
+
+:root {
+  /* Brand Colors */
+  --pf-forest: #1B3A2D;
+  --pf-forest-mid: #2D5C45;
+  --pf-forest-light: #3D7A5E;
+  --pf-sand: #F7F3EE;
+  --pf-sand-dark: #EDE7DC;
+  --pf-sand-deeper: #DDD5C8;
+  --pf-coral: #E8622A;
+  --pf-coral-light: #F07A45;
+  --pf-coral-pale: #FDF0EA;
+  --pf-white: #FFFFFF;
+  --pf-ink: #111A14;
+  --pf-ink-mid: #2A3D31;
+  --pf-body: #4A5E52;
+  --pf-muted: #8A9E92;
+  --pf-border: rgba(27, 58, 45, 0.12);
+  --pf-border-strong: rgba(27, 58, 45, 0.22);
+
+  /* Typography */
+  --pf-font-heading: 'Cormorant Garamond', Georgia, serif;
+  --pf-font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+  /* Spacing */
+  --pf-space-xs: 8px;
+  --pf-space-sm: 16px;
+  --pf-space-md: 24px;
+  --pf-space-lg: 40px;
+  --pf-space-xl: 60px;
+  --pf-space-2xl: 96px;
+
+  /* Border radius */
+  --pf-radius-sm: 6px;
+  --pf-radius-md: 8px;
+  --pf-radius-lg: 14px;
+  --pf-radius-xl: 16px;
+
+  /* Transitions */
+  --pf-transition-fast: 0.2s ease;
+  --pf-transition-base: 0.25s ease;
+  --pf-transition-slow: 0.3s ease;
+}
+
+/* Section label (small uppercase tag above headings) */
+.pf-section-label {
+  display: inline-block;
+  font-family: var(--pf-font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--pf-coral);
+  margin-bottom: 10px;
+}
+
+/* Section heading */
+.pf-section-heading {
+  font-family: var(--pf-font-heading);
+  font-size: clamp(28px, 3.2vw, 44px);
+  color: var(--pf-ink);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* Section subheading */
+.pf-section-sub {
+  font-size: 16px;
+  color: var(--pf-body);
+  line-height: 1.75;
+  margin-top: 12px;
+}
+
+/* Button utilities */
+.pf-btn {
+  font-family: var(--pf-font-body);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border-radius: var(--pf-radius-sm);
+  transition: background var(--pf-transition-fast), transform 0.15s ease, color var(--pf-transition-fast);
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.pf-btn:hover {
+  transform: translateY(-2px);
+}
+
+.pf-btn-primary {
+  background: var(--pf-forest);
+  color: #fff;
+  padding: 14px 32px;
+  font-size: 14px;
+}
+
+.pf-btn-primary:hover {
+  background: var(--pf-forest-mid);
+  color: #fff;
+}
+
+.pf-btn-coral {
+  background: var(--pf-coral);
+  color: #fff;
+  padding: 14px 32px;
+  font-size: 14px;
+}
+
+.pf-btn-coral:hover {
+  background: var(--pf-coral-light);
+  color: #fff;
+}
+
+.pf-btn-outline {
+  background: transparent;
+  color: var(--pf-forest);
+  border: 1.5px solid var(--pf-forest);
+  padding: 13px 32px;
+  font-size: 14px;
+}
+
+.pf-btn-outline:hover {
+  background: var(--pf-forest);
+  color: #fff;
+}
+
+/* Section spacing */
+.pf-section {
+  padding: var(--pf-space-2xl) 80px;
+}
+
+.pf-section--sm {
+  padding: var(--pf-space-xl) 80px;
+}
+
+@media (max-width: 768px) {
+  .pf-section {
+    padding: var(--pf-space-xl) 24px;
+  }
+  .pf-section--sm {
+    padding: var(--pf-space-lg) 24px;
+  }
+}
+
+/* Hover lift animation */
+.pf-hover-lift {
+  transition: transform var(--pf-transition-base), box-shadow var(--pf-transition-base);
+}
+
+.pf-hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(27, 58, 45, 0.12);
+}
+
+/* Fade-in animation */
+@keyframes pf-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pf-animate {
+  animation: pf-fade-in 0.6s ease forwards;
+  opacity: 0;
+}
+
+.pf-animate-d1 { animation-delay: 0.1s; }
+.pf-animate-d2 { animation-delay: 0.2s; }
+.pf-animate-d3 { animation-delay: 0.3s; }
+.pf-animate-d4 { animation-delay: 0.4s; }
+
+/* Product card hover enhancement - use with .pf-hover-lift */
+.pf-prod-card.pf-hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 60px rgba(27, 58, 45, 0.12);
+}

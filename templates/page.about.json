@@ -1,19 +1,69 @@
 {
   "sections": {
-    "main": {
-      "type": "main-page",
-      "settings": {}
+    "page_hero": {
+      "type": "pawflok-page-hero",
+      "settings": {
+        "label": "About Us",
+        "heading": "Our Story",
+        "subheading": "Premium pet accessories for Indian pet parents. Built to last, made with love.",
+        "show_trust_badges": true
+      }
     },
     "pawflok_brand_story": {
       "type": "pawflok-brand-story",
       "settings": {
-        "heading": "Our Story",
-        "text": "<p>Pawflok was founded with one mission: to bring premium, durable, and beautiful pet accessories to Indian pet parents. We know that pets are family, and they deserve the best.</p>"
+        "label": "Our Story",
+        "heading": "Born from a Dog Walk. Built for Every Pet.",
+        "paragraph1": "Pawflok was founded with one mission: to bring premium, durable, and beautiful pet accessories to Indian pet parents. We know that pets are family, and they deserve the best.",
+        "paragraph2": "Today we offer 200+ products trusted by pet families across India, all made to the same uncompromising standard: safe, durable, and genuinely beautiful.",
+        "image_emoji": "🐾",
+        "founded_year": "2019",
+        "founded_text": "Founded with love",
+        "stat1_num": "12K+",
+        "stat1_label": "Happy Pets",
+        "stat2_num": "35",
+        "stat2_label": "Cities",
+        "stat3_num": "4.9★",
+        "stat3_label": "Average Rating",
+        "btn_text": "Shop Collection →",
+        "btn_url": "shopify://collections/all"
       }
+    },
+    "pawflok_trust_strip": {
+      "type": "pawflok-trust-bar",
+      "blocks": {
+        "t1": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "🚚",
+            "title": "Free Shipping over ₹999",
+            "subtitle": "PAN India delivery"
+          }
+        },
+        "t2": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "🔒",
+            "title": "100% Secure Payments",
+            "subtitle": "256-bit encryption"
+          }
+        },
+        "t3": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "🏆",
+            "title": "Premium Quality",
+            "subtitle": "Vet-approved materials"
+          }
+        }
+      },
+      "block_order": ["t1", "t2", "t3"],
+      "settings": {}
     }
   },
   "order": [
-    "main",
-    "pawflok_brand_story"
+    "page_hero",
+    "pawflok_brand_story",
+    "pawflok_trust_strip"
   ]
 }

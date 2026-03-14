@@ -1,18 +1,52 @@
 {
   "sections": {
-    "main": {
-      "type": "main-page",
-      "settings": {}
-    },
-    "faq": {
-      "type": "custom-liquid",
+    "pawflok_faq": {
+      "type": "pawflok-faq",
       "settings": {
-        "custom_liquid": "<h2>Frequently Asked Questions</h2><details><summary>Do you ship all over India?</summary><p>Yes, we offer PAN India shipping!</p></details><details><summary>What materials are used?</summary><p>We use high-quality, durable materials suitable for the active Indian pet.</p></details>"
-      }
+        "bg_color": "#F7F3EE",
+        "label": "Support",
+        "heading": "Frequently Asked Questions",
+        "subheading": "Find answers to common questions about our products, shipping, and returns."
+      },
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you ship all over India?",
+            "answer": "<p>Yes, we offer PAN India shipping! Most orders are delivered within 3-7 business days depending on your location. Free shipping applies to orders above ₹999.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What materials are used in your products?",
+            "answer": "<p>We use high-quality, durable materials suitable for active Indian pets. All products are vet-approved and free from toxic dyes or cheap plastics.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>We offer a 7-day return policy for all unused accessories. Contact our support team to initiate a return. Refunds are processed within 5-7 working days.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How can I track my order?",
+            "answer": "<p>Once your order ships, you'll receive an email with a tracking link. You can also track your order from your account or by contacting our support team.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you offer wholesale or bulk orders?",
+            "answer": "<p>Yes! For bulk or wholesale inquiries, please reach out to us at support@pawflok.com with your requirements.</p>"
+          }
+        }
+      },
+      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5"]
     }
   },
-  "order": [
-    "main",
-    "faq"
-  ]
+  "order": ["pawflok_faq"]
 }

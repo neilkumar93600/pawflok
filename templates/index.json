@@ -3,60 +3,314 @@
     "pawflok_hero": {
       "type": "pawflok-hero",
       "settings": {
-        "heading": "Premium Pet Accessories for Indian Pets",
+        "eyebrow": "Premium Pet Accessories",
+        "heading_line1": "Premium Pet Accessories",
+        "heading_line2": "for Indian Pets",
+        "heading_line3": "Delivered to You.",
         "subheading": "Discover our exclusive Pawflok collection. Quality products for your furry friends, delivered across India.",
-        "button_label": "Shop Now",
-        "button_link": "shopify://collections/all"
+        "bg_color": "#F7F3EE",
+        "heading_color": "#111A14",
+        "btn1_text": "Shop Now",
+        "btn1_url": "shopify://collections/all",
+        "btn2_text": "Watch our story",
+        "btn2_url": "",
+        "rating": "4.9/5",
+        "review_count": "from 3,200+ verified reviews",
+        "hero_emoji": "🐕",
+        "float1_title": "Fast Dispatch",
+        "float1_sub": "Ships within 24 hours",
+        "float2_title": "#1 Rated Pet Store",
+        "float2_sub": "Best of 2025 Award",
+        "badge_num": "200+",
+        "badge_text": "Products Available"
       }
     },
     "pawflok_trust_bar": {
       "type": "pawflok-trust-bar",
+      "blocks": {
+        "trust_1": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "🚚",
+            "title": "Free Shipping in India over ₹999",
+            "subtitle": "PAN India delivery"
+          }
+        },
+        "trust_2": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "🔒",
+            "title": "100% Secure Payments",
+            "subtitle": "256-bit encryption"
+          }
+        },
+        "trust_3": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "🏆",
+            "title": "Premium Quality Guarantee",
+            "subtitle": "Vet-approved materials"
+          }
+        }
+      },
+      "block_order": ["trust_1", "trust_2", "trust_3"],
+      "settings": {}
+    },
+    "pawflok_collections": {
+      "type": "pawflok-collections",
+      "blocks": {
+        "coll_1": {
+          "type": "collection_card",
+          "settings": {
+            "title": "Dog Essentials",
+            "tag": "Collection",
+            "count": "86 products",
+            "emoji": "🐶",
+            "bg_color": "#1B3A2D",
+            "cta": "Shop Dogs",
+            "url": "/collections/all"
+          }
+        },
+        "coll_2": {
+          "type": "collection_card",
+          "settings": {
+            "title": "Cat Collection",
+            "tag": "Collection",
+            "count": "64 products",
+            "emoji": "🐱",
+            "bg_color": "#2A1A0E",
+            "cta": "Shop Cats",
+            "url": "/collections/all"
+          }
+        },
+        "coll_3": {
+          "type": "collection_card",
+          "settings": {
+            "title": "Birds & Small Pets",
+            "tag": "Collection",
+            "count": "42 products",
+            "emoji": "🐦",
+            "bg_color": "#1A2A3A",
+            "cta": "Shop More",
+            "url": "/collections/all"
+          }
+        },
+        "coll_4": {
+          "type": "collection_card",
+          "settings": {
+            "title": "Shop All",
+            "tag": "New",
+            "count": "200+ products",
+            "emoji": "🛍️",
+            "bg_color": "#1A1A2E",
+            "cta": "Explore",
+            "url": "/collections/all"
+          }
+        }
+      },
+      "block_order": ["coll_1", "coll_2", "coll_3", "coll_4"],
       "settings": {
-        "text_1": "Free Shipping in India over ₹999",
-        "text_2": "100% Secure Payments",
-        "text_3": "Premium Quality Guarantee"
+        "bg_color": "#F7F3EE",
+        "label": "Shop by Pet",
+        "heading": "Every Pet. Every Need.",
+        "subheading": "Curated collections built around your companion's lifestyle — from cozy beds to smart tech."
       }
     },
     "pawflok_bestsellers": {
       "type": "pawflok-bestsellers",
       "settings": {
+        "bg_color": "#F7F3EE",
+        "label": "Most Loved",
         "heading": "Our Bestsellers",
-        "collection": "frontpage"
-      }
+        "subheading": "What 12,000+ pet families are buying this month.",
+        "show_tabs": true,
+        "tabs": "All, Dogs, Cats, On Sale",
+        "view_all_text": "View All 200+ Products →",
+        "view_all_url": "shopify://collections/all"
+      },
+      "blocks": {
+        "prod_1": {
+          "type": "product_card",
+          "settings": {
+            "title": "Luxury Leather Dog Collar",
+            "category": "Dogs · Collars",
+            "emoji": "🦮",
+            "price": "₹1,499",
+            "compare_price": "₹1,999",
+            "stars": "★★★★★",
+            "review_count": "248",
+            "badge_text": "Bestseller",
+            "badge_type": "best"
+          }
+        },
+        "prod_2": {
+          "type": "product_card",
+          "settings": {
+            "title": "Orthopedic Memory Foam Bed",
+            "category": "Dogs · Beds",
+            "emoji": "🛏️",
+            "price": "₹3,999",
+            "compare_price": "₹4,999",
+            "stars": "★★★★★",
+            "review_count": "183",
+            "badge_text": "New",
+            "badge_type": "new"
+          }
+        },
+        "prod_3": {
+          "type": "product_card",
+          "settings": {
+            "title": "Interactive Feather Wand Set",
+            "category": "Cats · Toys",
+            "emoji": "🐱",
+            "price": "₹599",
+            "compare_price": "₹799",
+            "stars": "★★★★☆",
+            "review_count": "312",
+            "badge_text": "Sale −25%",
+            "badge_type": "sale"
+          }
+        },
+        "prod_4": {
+          "type": "product_card",
+          "settings": {
+            "title": "Stainless Steel Bowl Set",
+            "category": "All Pets · Feeding",
+            "emoji": "🍽️",
+            "price": "₹899",
+            "compare_price": "",
+            "stars": "★★★★★",
+            "review_count": "427",
+            "badge_text": "",
+            "badge_type": "best"
+          }
+        }
+      },
+      "block_order": ["prod_1", "prod_2", "prod_3", "prod_4"]
     },
     "pawflok_benefits": {
       "type": "pawflok-benefits",
       "settings": {
+        "label": "Why Pawflok",
         "heading": "Why Choose Pawflok?",
-        "benefit_1_title": "Durable Materials",
-        "benefit_1_text": "Built to withstand Indian weather and active pets.",
-        "benefit_2_title": "Comfort First",
-        "benefit_2_text": "Ergonomic designs to ensure your pet's complete comfort.",
-        "benefit_3_title": "Fast Delivery",
-        "benefit_3_text": "PAN India shipping with easy tracking."
-      }
+        "subheading": "Every decision we make goes through one filter: is this good enough for our own pets?"
+      },
+      "blocks": {
+        "ben_1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "🧪",
+            "title": "Durable Materials",
+            "text": "Built to withstand Indian weather and active pets. Vet-approved, non-toxic materials."
+          }
+        },
+        "ben_2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "🛋️",
+            "title": "Comfort First",
+            "text": "Ergonomic designs to ensure your pet's complete comfort. Every product tested by real pets."
+          }
+        },
+        "ben_3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "🚚",
+            "title": "Fast Delivery",
+            "text": "PAN India shipping with easy tracking. Most orders dispatched within 24 hours."
+          }
+        },
+        "ben_4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "💬",
+            "title": "Real Human Support",
+            "text": "Our pet-loving team is available 7 days a week. No bots, no scripts — just real people."
+          }
+        }
+      },
+      "block_order": ["ben_1", "ben_2", "ben_3", "ben_4"]
     },
     "pawflok_testimonials": {
       "type": "pawflok-testimonials",
       "settings": {
+        "label": "Reviews",
         "heading": "Happy Pet Parents",
-        "review_1_text": "My dog absolutely loves the new harness! It fits perfectly and the material is top-notch. Highly recommended for pet owners in India.",
-        "review_1_author": "- Priya S., Mumbai",
-        "review_2_text": "The delivery was super fast and the quality exceeded my expectations. Pawflok is my new go-to for pet accessories.",
-        "review_2_author": "- Rahul M., Bengaluru"
-      }
+        "overall_rating": "4.9",
+        "total_reviews": "3,240 verified reviews"
+      },
+      "blocks": {
+        "rev_1": {
+          "type": "review",
+          "settings": {
+            "review": "My dog absolutely loves the new harness! It fits perfectly and the material is top-notch. Highly recommended for pet owners in India.",
+            "avatar": "👩",
+            "name": "Priya S.",
+            "meta": "Dog Mom · Mumbai",
+            "product": "Premium Dog Harness"
+          }
+        },
+        "rev_2": {
+          "type": "review",
+          "settings": {
+            "review": "The delivery was super fast and the quality exceeded my expectations. Pawflok is my new go-to for pet accessories.",
+            "avatar": "🧑",
+            "name": "Rahul M.",
+            "meta": "Cat Dad · Bengaluru",
+            "product": "Cat Collar Set"
+          }
+        },
+        "rev_3": {
+          "type": "review",
+          "settings": {
+            "review": "Best pet store in India! Great products, fast shipping, and the customer service is exceptional.",
+            "avatar": "👩",
+            "name": "Anita K.",
+            "meta": "Pet Parent · Delhi",
+            "product": "Orthopedic Pet Bed"
+          }
+        }
+      },
+      "block_order": ["rev_1", "rev_2", "rev_3"]
     },
     "pawflok_newsletter": {
       "type": "pawflok-newsletter",
       "settings": {
+        "label": "Join the Family",
         "heading": "Join the Pawflok Family",
-        "subheading": "Subscribe for updates on new collections and exclusive discounts."
-      }
+        "subheading": "Subscribe for updates on new collections and exclusive discounts. Get 15% off your first order!",
+        "offer": "15% OFF",
+        "offer_sub": "your first order when you join",
+        "btn_text": "Claim My 15% Discount →",
+        "disclaimer": "🔒 No spam, ever. Unsubscribe in one click."
+      },
+      "blocks": {
+        "perk_1": {
+          "type": "perk",
+          "settings": {
+            "perk_text": "Exclusive member-only discounts"
+          }
+        },
+        "perk_2": {
+          "type": "perk",
+          "settings": {
+            "perk_text": "First access to new product launches"
+          }
+        },
+        "perk_3": {
+          "type": "perk",
+          "settings": {
+            "perk_text": "Free pet care guides & vet tips"
+          }
+        }
+      },
+      "block_order": ["perk_1", "perk_2", "perk_3"]
     }
   },
   "order": [
     "pawflok_hero",
     "pawflok_trust_bar",
+    "pawflok_collections",
     "pawflok_bestsellers",
     "pawflok_benefits",
     "pawflok_testimonials",

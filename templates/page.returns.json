@@ -1,18 +1,38 @@
 {
   "sections": {
-    "main": {
-      "type": "main-page",
-      "settings": {}
-    },
-    "return_policy": {
-      "type": "custom-liquid",
+    "pawflok_returns": {
+      "type": "pawflok-policy-page",
       "settings": {
-        "custom_liquid": "<h2>Return & Exchange Policy</h2><p>We offer a 7-day return policy for all unused accessories. Please contact our support team to initiate a return within 7 days of delivery. Refunds will be processed within 5-7 working days to the original payment method.</p>"
-      }
+        "heading": "Return & Exchange Policy",
+        "subheading": "We want you to be completely satisfied with your purchase.",
+        "content": "<h2>Return Policy</h2><p>We offer a 7-day return policy for all unused accessories. Please contact our support team to initiate a return within 7 days of delivery.</p><h2>Refunds</h2><p>Refunds will be processed within 5-7 working days to the original payment method once we receive the returned item.</p><h2>Conditions</h2><p>Items must be unused, in original packaging, and in resalable condition. Personalized or custom items may not be eligible for return.</p><h2>How to Return</h2><p>1. Contact us at support@pawflok.com with your order number.<br>2. We'll send you a return authorization and instructions.<br>3. Pack the item securely and ship it back.<br>4. Once received, we'll process your refund.</p>",
+        "content_bg_color": "#F7F3EE"
+      },
+      "blocks": {
+        "tb1": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "↩️",
+            "text": "7-day easy returns"
+          }
+        },
+        "tb2": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "💰",
+            "text": "Full refund guarantee"
+          }
+        },
+        "tb3": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "📞",
+            "text": "Dedicated support"
+          }
+        }
+      },
+      "block_order": ["tb1", "tb2", "tb3"]
     }
   },
-  "order": [
-    "main",
-    "return_policy"
-  ]
+  "order": ["pawflok_returns"]
 }
