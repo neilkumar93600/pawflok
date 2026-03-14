@@ -49,28 +49,41 @@
   color: var(--pf-body);
 }
 .pf-contact-trust-icon { font-size: 20px; }
+.pf-contact-trust-img { width: 20px; height: 20px; object-fit: contain; }
 @media (max-width: 768px) {
   .pf-contact-hero { padding: 48px 24px 32px; }
   .pf-contact-trust { gap: 20px; }
 }
 </style>
 
-<section class="pf-contact-hero">
+<section class="pf-contact-hero" {% if section.settings.background_image != blank %}style="background-image: linear-gradient(180deg, rgba(247,243,238,.92), rgba(247,243,238,.92)), url('{{ section.settings.background_image | image_url: width: 1920 }}'); background-size: cover; background-position: center;"{% endif %}>
   <div class="pf-contact-hero-inner">
     <div class="pf-contact-hero-label">{{ section.settings.label }}</div>
     <h1>{{ section.settings.heading }}</h1>
     <p>{{ section.settings.subheading }}</p>
     <div class="pf-contact-trust">
       <div class="pf-contact-trust-item">
-        <span class="pf-contact-trust-icon">⏱️</span>
+        {% if section.settings.trust1_image != blank %}
+          <img src="{{ section.settings.trust1_image | image_url: width: 40 }}" alt="" class="pf-contact-trust-img">
+        {% else %}
+          <span class="pf-contact-trust-icon">⏱️</span>
+        {% endif %}
         {{ section.settings.response_time }}
       </div>
       <div class="pf-contact-trust-item">
-        <span class="pf-contact-trust-icon">📧</span>
+        {% if section.settings.trust2_image != blank %}
+          <img src="{{ section.settings.trust2_image | image_url: width: 40 }}" alt="" class="pf-contact-trust-img">
+        {% else %}
+          <span class="pf-contact-trust-icon">📧</span>
+        {% endif %}
         {{ section.settings.email }}
       </div>
       <div class="pf-contact-trust-item">
-        <span class="pf-contact-trust-icon">🕐</span>
+        {% if section.settings.trust3_image != blank %}
+          <img src="{{ section.settings.trust3_image | image_url: width: 40 }}" alt="" class="pf-contact-trust-img">
+        {% else %}
+          <span class="pf-contact-trust-icon">🕐</span>
+        {% endif %}
         {{ section.settings.hours }}
       </div>
     </div>
@@ -86,7 +99,10 @@
     { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Have a question? We'd love to hear from you. Send us a message and we'll respond as soon as possible." },
     { "type": "text", "id": "response_time", "label": "Response time", "default": "Usually within 24 hours" },
     { "type": "text", "id": "email", "label": "Email", "default": "support@pawflok.com" },
-    { "type": "text", "id": "hours", "label": "Support hours", "default": "Mon–Sat, 9AM–6PM IST" }
+    { "type": "text", "id": "hours", "label": "Support hours", "default": "Mon–Sat, 9AM–6PM IST" },
+    { "type": "image_picker", "id": "trust1_image", "label": "Trust 1 icon (24hr response)" },
+    { "type": "image_picker", "id": "trust2_image", "label": "Trust 2 icon (email)" },
+    { "type": "image_picker", "id": "trust3_image", "label": "Trust 3 icon (hours)" }
   ],
   "presets": [{ "name": "pawflok Contact Hero" }]
 }

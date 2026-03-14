@@ -72,6 +72,7 @@
 details[open] .pf-faq-icon {
   transform: rotate(45deg);
 }
+.pf-faq-icon-img { width: 18px; height: 18px; object-fit: contain; display: block; }
 .pf-faq-content {
   padding: 0 0 24px 0;
 }
@@ -112,7 +113,13 @@ details[open] .pf-faq-icon {
         <details class="pf-faq-details">
           <summary class="pf-faq-summary">
             {{ block.settings.question }}
-            <span class="pf-faq-icon">+</span>
+            <span class="pf-faq-icon">
+              {% if section.settings.expand_icon != blank %}
+                <img src="{{ section.settings.expand_icon | image_url: width: 24 }}" alt="" class="pf-faq-icon-img">
+              {% else %}
+                +
+              {% endif %}
+            </span>
           </summary>
           <div class="pf-faq-content">
             <div class="pf-faq-content-inner">
@@ -133,6 +140,7 @@ details[open] .pf-faq-icon {
     { "type": "text", "id": "label", "label": "Section label", "default": "Support" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently Asked Questions" },
     { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Find answers to common questions about our products, shipping, and returns." },
+    { "type": "image_picker", "id": "expand_icon", "label": "Expand/collapse icon image" },
     { "type": "range", "id": "padding_top", "min": 40, "max": 120, "step": 8, "unit": "px", "label": "Top padding", "default": 96 },
     { "type": "range", "id": "padding_bottom", "min": 40, "max": 120, "step": 8, "unit": "px", "label": "Bottom padding", "default": 96 }
   ],

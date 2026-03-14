@@ -70,6 +70,7 @@
   letter-spacing: 0.04em;
 }
 .pf-ugc-overlay-icon { font-size: 22px; }
+.pf-ugc-overlay-img { width: 22px; height: 22px; object-fit: contain; }
 
 .pf-ugc-follow {
   text-align: center;
@@ -117,7 +118,13 @@
           {% endunless %}
         </div>
         <div class="pf-ugc-overlay">
-          <div class="pf-ugc-overlay-icon">🛍️</div>
+          <div class="pf-ugc-overlay-icon">
+            {% if block.settings.overlay_icon != blank %}
+              <img src="{{ block.settings.overlay_icon | image_url: width: 44 }}" alt="" class="pf-ugc-overlay-img">
+            {% else %}
+              🛍️
+            {% endif %}
+          </div>
           <div class="pf-ugc-overlay-text">{{ section.settings.overlay_text }}</div>
         </div>
       </div>
@@ -149,7 +156,8 @@
       "type": "ugc_photo",
       "name": "Photo",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Photo (optional — uses emoji if blank)" },
+        { "type": "image_picker", "id": "image", "label": "Photo (uses emoji if blank)" },
+        { "type": "image_picker", "id": "overlay_icon", "label": "Hover overlay icon image" },
         { "type": "text", "id": "emoji", "label": "Emoji placeholder", "default": "🐕" },
         { "type": "color", "id": "bg_color", "label": "Background color", "default": "#EDE7DC" }
       ]

@@ -151,9 +151,13 @@
         {% assign feat_product = all_products[section.settings.product] %}
         {% if feat_product.featured_image %}
           <img src="{{ feat_product.featured_image | image_url: width: 600 }}" class="pf-feat-img-product" alt="{{ feat_product.title }}">
+        {% elsif section.settings.fallback_image != blank %}
+          <img src="{{ section.settings.fallback_image | image_url: width: 600 }}" class="pf-feat-img-product" alt="">
         {% else %}
           <div class="pf-feat-emoji">{{ section.settings.fallback_emoji }}</div>
         {% endif %}
+      {% elsif section.settings.fallback_image != blank %}
+        <img src="{{ section.settings.fallback_image | image_url: width: 600 }}" class="pf-feat-img-product" alt="">
       {% else %}
         <div class="pf-feat-emoji">{{ section.settings.fallback_emoji }}</div>
       {% endif %}
@@ -214,7 +218,8 @@
     { "type": "color", "id": "bg_color", "label": "Section background", "default": "#EDE7DC" },
     { "type": "color", "id": "image_bg", "label": "Image panel background", "default": "#1B3A2D" },
     { "type": "product", "id": "product", "label": "Product (auto-fills image)" },
-    { "type": "text", "id": "fallback_emoji", "label": "Emoji (if no product image)", "default": "📡" },
+    { "type": "image_picker", "id": "fallback_image", "label": "Fallback image (if no product)" },
+    { "type": "text", "id": "fallback_emoji", "label": "Emoji (if no image)", "default": "📡" },
     { "type": "text", "id": "badge_text", "label": "Badge text", "default": "⭐ Staff Pick of the Month" },
     { "type": "text", "id": "label", "label": "Section label", "default": "Featured Product" },
     { "type": "textarea", "id": "heading", "label": "Product heading", "default": "Smart GPS\nPet Tracker Pro" },
