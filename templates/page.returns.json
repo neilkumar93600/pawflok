@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "return_policy": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<h2>Return & Exchange Policy</h2><p>We offer a 7-day return policy for all unused accessories. Please contact our support team to initiate a return within 7 days of delivery. Refunds will be processed within 5-7 working days to the original payment method.</p>"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "return_policy"
+  ]
+}

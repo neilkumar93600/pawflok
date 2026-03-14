@@ -1,4 +1,4 @@
-{% comment %} PAWFOLK — Custom Footer Section {% endcomment %}
+{% comment %} pawflok — Custom Footer Section {% endcomment %}
 
 <style>
   .pf-footer {
@@ -307,7 +307,7 @@
       {%- comment -%} Mini newsletter {%- endcomment -%}
       {% if section.settings.show_newsletter %}
         <div class="pf-footer-nl-label">{{ section.settings.nl_label }}</div>
-        {% form 'customer', id: 'pawfolk-footer-newsletter' %}
+        {% form 'customer', id: 'pawflok-footer-newsletter' %}
           <input type="hidden" name="contact[tags]" value="newsletter">
           <div class="pf-footer-nl-form">
             <input
@@ -387,7 +387,7 @@
 
 {% schema %}
 {
-  "name": "Pawfolk Footer",
+  "name": "pawflok Footer",
   "settings": [
     {
       "type": "header",
@@ -422,7 +422,7 @@
       "type": "text",
       "id": "brand_name",
       "label": "Brand name (for copyright)",
-      "default": "Pawfolk Ltd"
+      "default": "pawflok Ltd"
     },
     {
       "type": "header",
@@ -531,7 +531,7 @@
   ],
   "presets": [
     {
-      "name": "Pawfolk Footer",
+      "name": "pawflok Footer",
       "blocks": [
         {
           "type": "link_column",
@@ -551,7 +551,7 @@
           "type": "link_column",
           "settings": {
             "heading": "Company",
-            "manual_links": "About Pawfolk | /pages/about-us\nOur Mission | /pages/about-us\nPet Blog | /blogs/news\nSustainability | /pages/sustainability\nWholesale | /pages/wholesale"
+            "manual_links": "About pawflok | /pages/about-us\nOur Mission | /pages/about-us\nPet Blog | /blogs/news\nSustainability | /pages/sustainability\nWholesale | /pages/wholesale"
           }
         }
       ]

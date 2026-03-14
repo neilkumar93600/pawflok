@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "faq": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<h2>Frequently Asked Questions</h2><details><summary>Do you ship all over India?</summary><p>Yes, we offer PAN India shipping!</p></details><details><summary>What materials are used?</summary><p>We use high-quality, durable materials suitable for the active Indian pet.</p></details>"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "faq"
+  ]
+}

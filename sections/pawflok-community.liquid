@@ -1,4 +1,4 @@
-{% comment %} PAWFOLK — Community / UGC Instagram Grid {% endcomment %}
+{% comment %} pawflok — Community / UGC Instagram Grid {% endcomment %}
 
 <style>
 .pf-ugc {
@@ -104,7 +104,7 @@
     <div class="pf-ugc-label">{{ section.settings.label }}</div>
     <h2>{{ section.settings.heading }}</h2>
     <p>{{ section.settings.subheading | replace: section.settings.hashtag, '<strong>' | append: '' }}
-      Share your Pawfolk moments using <a href="{{ section.settings.hashtag_url }}" class="pf-ugc-hashtag-pill">{{ section.settings.hashtag }}</a> and get featured here.
+      Share your pawflok moments using <a href="{{ section.settings.hashtag_url }}" class="pf-ugc-hashtag-pill">{{ section.settings.hashtag }}</a> and get featured here.
     </p>
   </div>
 
@@ -132,15 +132,15 @@
 
 {% schema %}
 {
-  "name": "Pawfolk Community Grid",
+  "name": "pawflok Community Grid",
   "settings": [
     { "type": "color", "id": "bg_color", "label": "Background color", "default": "#FFFFFF" },
     { "type": "text", "id": "label", "label": "Section label", "default": "Community" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Real Pets. Real Smiles." },
-    { "type": "textarea", "id": "subheading", "label": "Subheading (shown above hashtag)", "default": "Share your Pawfolk moments and get featured here." },
-    { "type": "text", "id": "hashtag", "label": "Hashtag", "default": "#PawfolkPets" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading (shown above hashtag)", "default": "Share your pawflok moments and get featured here." },
+    { "type": "text", "id": "hashtag", "label": "Hashtag", "default": "#pawflokPets" },
     { "type": "url", "id": "hashtag_url", "label": "Hashtag URL (Instagram search)" },
-    { "type": "text", "id": "instagram_handle", "label": "Instagram handle", "default": "@PawfolkStore" },
+    { "type": "text", "id": "instagram_handle", "label": "Instagram handle", "default": "@pawflokStore" },
     { "type": "url", "id": "instagram_url", "label": "Instagram profile URL" },
     { "type": "text", "id": "overlay_text", "label": "Hover overlay text", "default": "Shop This Look" }
   ],
@@ -156,7 +156,7 @@
     }
   ],
   "presets": [{
-    "name": "Pawfolk Community Grid",
+    "name": "pawflok Community Grid",
     "blocks": [
       { "type": "ugc_photo", "settings": { "emoji": "🐕", "bg_color": "#EDE7DC" }},
       { "type": "ugc_photo", "settings": { "emoji": "🐈", "bg_color": "#D4E8DC" }},

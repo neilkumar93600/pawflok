@@ -38,7 +38,7 @@
     {{ content_for_header }}
 
     {% comment %} =============================================
-      PAWFOLK CUSTOM ADDITIONS — DO NOT REMOVE
+      pawflok CUSTOM ADDITIONS — DO NOT REMOVE
     ============================================= {% endcomment %}
 
     {% comment %} Google Fonts — Cormorant Garamond (headings) + Plus Jakarta Sans (body) {% endcomment %}
@@ -49,7 +49,7 @@
       rel="stylesheet"
     >
 
-    {% comment %} Pawfolk Global CSS Variables + Base Styles {% endcomment %}
+    {% comment %} pawflok Global CSS Variables + Base Styles {% endcomment %}
     <style>
       :root {
         --pf-forest:       #1B3A2D;
@@ -72,7 +72,7 @@
         --pf-font-body:    'Plus Jakarta Sans', system-ui, sans-serif;
       }
 
-      /* Apply Pawfolk fonts globally */
+      /* Apply pawflok fonts globally */
       body {
         font-family: var(--pf-font-body);
         background-color: var(--pf-sand);
@@ -161,12 +161,12 @@
         margin-top: 12px;
       }
 
-      /* Announcement bar override to match Pawfolk brand */
+      /* Announcement bar override to match pawflok brand */
       .shopify-section--announcement-bar {
         background: var(--pf-forest) !important;
       }
 
-      /* Make Shopify's built-in buttons match Pawfolk */
+      /* Make Shopify's built-in buttons match pawflok */
       .button, .btn, button[type="submit"]:not(.pf-nl-btn) {
         font-family: var(--pf-font-body) !important;
         letter-spacing: 0.04em !important;
@@ -204,7 +204,7 @@
       .pf-animate-d4 { animation-delay: 0.4s; }
     </style>
 
-    {% comment %} END PAWFOLK CUSTOM ADDITIONS {% endcomment %}
+    {% comment %} END pawflok CUSTOM ADDITIONS {% endcomment %}
 
   </head>
 
@@ -303,7 +303,7 @@
       {% render 'quick-add-modal' %}
     {% endif %}
 
-    {% comment %} Pawfolk scroll animation trigger {% endcomment %}
+    {% comment %} pawflok scroll animation trigger {% endcomment %}
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const observer = new IntersectionObserver(function(entries) {
