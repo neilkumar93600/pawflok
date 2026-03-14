@@ -1,0 +1,74 @@
+{% comment %} PAWFOLK — Trust Bar Section {% endcomment %}
+
+<style>
+.pf-trust {
+  background: #1B3A2D;
+  display: flex;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.pf-trust-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 22px 28px;
+  border-right: 1px solid rgba(255,255,255,.08);
+}
+.pf-trust-item:last-child { border-right: none; }
+.pf-trust-icon-wrap {
+  width: 42px; height: 42px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.pf-trust-main { font-size: 13px; font-weight: 600; color: #fff; }
+.pf-trust-sub { font-size: 11px; color: rgba(255,255,255,.45); margin-top: 2px; }
+@media (max-width: 768px) {
+  .pf-trust { flex-wrap: wrap; }
+  .pf-trust-item { width: 50%; border-right: 1px solid rgba(255,255,255,.08); }
+}
+</style>
+
+<div class="pf-trust">
+  {% for block in section.blocks %}
+    <div class="pf-trust-item" {{ block.shopify_attributes }}>
+      <div class="pf-trust-icon-wrap">{{ block.settings.icon }}</div>
+      <div>
+        <div class="pf-trust-main">{{ block.settings.title }}</div>
+        <div class="pf-trust-sub">{{ block.settings.subtitle }}</div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "Pawfolk Trust Bar",
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "trust_item",
+      "name": "Trust item",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Emoji icon", "default": "🚚" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Free Shipping" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Orders over $49" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Pawfolk Trust Bar",
+    "blocks": [
+      { "type": "trust_item", "settings": { "icon": "🚚", "title": "Free Shipping", "subtitle": "Orders over $49" }},
+      { "type": "trust_item", "settings": { "icon": "↩️", "title": "30-Day Returns", "subtitle": "No questions asked" }},
+      { "type": "trust_item", "settings": { "icon": "🔒", "title": "Secure Payment", "subtitle": "256-bit encryption" }},
+      { "type": "trust_item", "settings": { "icon": "🧪", "title": "Vet Approved", "subtitle": "Safe for all breeds" }},
+      { "type": "trust_item", "settings": { "icon": "🏆", "title": "1-Year Warranty", "subtitle": "On every product" }}
+    ]
+  }]
+}
+{% endschema %}

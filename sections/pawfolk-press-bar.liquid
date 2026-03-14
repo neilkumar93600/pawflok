@@ -1,0 +1,92 @@
+{% comment %} PAWFOLK — Press Bar ("As Seen In") {% endcomment %}
+
+<style>
+.pf-press {
+  background: {{ section.settings.bg_color }};
+  border-top: 1px solid rgba(27,58,45,0.10);
+  border-bottom: 1px solid rgba(27,58,45,0.10);
+  padding: 20px 80px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  overflow: hidden;
+}
+.pf-press-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #8A9E92;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.pf-press-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(27,58,45,0.22);
+  flex-shrink: 0;
+}
+.pf-press-logos {
+  display: flex;
+  align-items: center;
+  gap: 44px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+.pf-press-name {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 19px;
+  font-weight: 600;
+  color: {{ section.settings.logo_color }};
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+.pf-press-name:hover { color: #8A9E92; }
+@media (max-width: 768px) {
+  .pf-press { padding: 16px 24px; gap: 20px; }
+  .pf-press-logos { gap: 24px; }
+  .pf-press-name { font-size: 15px; }
+}
+</style>
+
+<div class="pf-press">
+  <div class="pf-press-label">{{ section.settings.label }}</div>
+  <div class="pf-press-divider"></div>
+  <div class="pf-press-logos">
+    {% for block in section.blocks %}
+      <div class="pf-press-name" {{ block.shopify_attributes }}>{{ block.settings.name }}</div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Pawfolk Press Bar",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#FFFFFF" },
+    { "type": "color", "id": "logo_color", "label": "Logo text color", "default": "#DDD5C8" },
+    { "type": "text", "id": "label", "label": "Label text", "default": "As seen in" }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Press logo",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Publication name", "default": "Forbes" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Pawfolk Press Bar",
+    "blocks": [
+      { "type": "logo", "settings": { "name": "Forbes" }},
+      { "type": "logo", "settings": { "name": "PetMD" }},
+      { "type": "logo", "settings": { "name": "Vogue Pets" }},
+      { "type": "logo", "settings": { "name": "The Guardian" }},
+      { "type": "logo", "settings": { "name": "BuzzFeed" }}
+    ]
+  }]
+}
+{% endschema %}

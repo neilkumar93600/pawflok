@@ -1,0 +1,153 @@
+{% comment %} PAWFOLK — Collections Grid Section {% endcomment %}
+
+<style>
+.pf-collections {
+  padding: {{ section.settings.padding_top }}px 80px {{ section.settings.padding_bottom }}px;
+  background: {{ section.settings.bg_color }};
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+.pf-coll-head { margin-bottom: 44px; }
+.pf-coll-label {
+  display: inline-block;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: #E8622A; margin-bottom: 10px;
+}
+.pf-coll-head h2 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(28px, 3.2vw, 44px);
+  color: #111A14; line-height: 1.15;
+}
+.pf-coll-head p {
+  font-size: 16px; color: #4A5E52;
+  line-height: 1.75; margin-top: 12px;
+  max-width: 520px;
+}
+.pf-coll-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 260px 260px;
+  gap: 14px;
+}
+.pf-coll-item {
+  border-radius: 14px; overflow: hidden;
+  position: relative; cursor: pointer;
+}
+.pf-coll-item.pf-tall { grid-row: span 2; }
+.pf-coll-bg {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.5s ease;
+  background-size: cover; background-position: center;
+}
+.pf-coll-item:hover .pf-coll-bg { transform: scale(1.06); }
+.pf-coll-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(165deg, transparent 30%, rgba(10,22,14,0.82) 100%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 28px;
+}
+.pf-coll-tag {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.55); text-transform: uppercase; margin-bottom: 5px;
+}
+.pf-coll-name {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 26px; font-weight: 700; color: #fff; line-height: 1.1;
+}
+.pf-coll-count { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 4px; }
+.pf-coll-arrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 12px; color: rgba(255,255,255,0.8);
+  font-size: 13px; font-weight: 600;
+  text-decoration: none; transition: gap 0.2s;
+}
+.pf-coll-item:hover .pf-coll-arrow { gap: 10px; }
+@media (max-width: 768px) {
+  .pf-collections { padding: 60px 24px; }
+  .pf-coll-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    height: auto;
+  }
+  .pf-coll-item { height: 200px; }
+  .pf-coll-item.pf-tall { grid-row: span 1; }
+}
+@media (max-width: 480px) {
+  .pf-coll-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<section class="pf-collections">
+  <div class="pf-coll-head">
+    <div class="pf-coll-label">{{ section.settings.label }}</div>
+    <h2>{{ section.settings.heading }}</h2>
+    <p>{{ section.settings.subheading }}</p>
+  </div>
+
+  <div class="pf-coll-grid">
+    {% for block in section.blocks %}
+      {% assign is_tall = false %}
+      {% if forloop.first %}{% assign is_tall = true %}{% endif %}
+
+      <div class="pf-coll-item{% if is_tall %} pf-tall{% endif %}" {{ block.shopify_attributes }}>
+        <div class="pf-coll-bg" style="background-color: {{ block.settings.bg_color }};{% if block.settings.collection != blank and collections[block.settings.collection].image %} background-image: url('{{ collections[block.settings.collection].image | image_url: width: 800 }}');{% endif %}">
+          {% unless block.settings.collection != blank and collections[block.settings.collection].image %}
+            <span style="font-size:{% if is_tall %}120{% else %}80{% endif %}px">{{ block.settings.emoji }}</span>
+          {% endunless %}
+        </div>
+        <div class="pf-coll-overlay">
+          <div class="pf-coll-tag">{{ block.settings.tag }}</div>
+          <div class="pf-coll-name">{{ block.settings.title }}</div>
+          {% if block.settings.collection != blank %}
+            <div class="pf-coll-count">{{ collections[block.settings.collection].products_count }} products</div>
+          {% else %}
+            <div class="pf-coll-count">{{ block.settings.count }}</div>
+          {% endif %}
+          <a href="{% if block.settings.collection != blank %}{{ collections[block.settings.collection].url }}{% else %}{{ block.settings.url }}{% endif %}" class="pf-coll-arrow">
+            {{ block.settings.cta }} →
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pawfolk Collections Grid",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#F7F3EE" },
+    { "type": "text", "id": "label", "label": "Section label", "default": "Shop by Pet" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Every Pet. Every Need." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Curated collections built around your companion's lifestyle — from cozy beds to smart tech." },
+    { "type": "range", "id": "padding_top", "min": 40, "max": 120, "step": 8, "unit": "px", "label": "Top padding", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "min": 40, "max": 120, "step": 8, "unit": "px", "label": "Bottom padding", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "collection_card",
+      "name": "Collection card",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection (auto-fills count + image)" },
+        { "type": "text", "id": "title", "label": "Title (overrides collection name)", "default": "Dog Essentials" },
+        { "type": "text", "id": "tag", "label": "Tag label", "default": "Collection" },
+        { "type": "text", "id": "count", "label": "Product count (if no collection)", "default": "86 products" },
+        { "type": "text", "id": "emoji", "label": "Emoji (shown if no collection image)", "default": "🐶" },
+        { "type": "color", "id": "bg_color", "label": "Background color", "default": "#1B3A2D" },
+        { "type": "text", "id": "cta", "label": "CTA text", "default": "Shop Dogs" },
+        { "type": "url", "id": "url", "label": "URL (if no collection selected)" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Pawfolk Collections Grid",
+    "blocks": [
+      { "type": "collection_card", "settings": { "title": "Dog Essentials", "tag": "Collection", "count": "86 products", "emoji": "🐶", "bg_color": "#1B3A2D", "cta": "Shop Dogs", "url": "/collections/dogs" }},
+      { "type": "collection_card", "settings": { "title": "Cat Collection", "tag": "Collection", "count": "64 products", "emoji": "🐱", "bg_color": "#2A1A0E", "cta": "Shop Cats", "url": "/collections/cats" }},
+      { "type": "collection_card", "settings": { "title": "Birds & Small Pets", "tag": "Collection", "count": "42 products", "emoji": "🐦", "bg_color": "#1A2A3A", "cta": "Shop More", "url": "/collections/small-pets" }},
+      { "type": "collection_card", "settings": { "title": "Aquatics & Reptiles", "tag": "New", "count": "28 products", "emoji": "🐠", "bg_color": "#1A1A2E", "cta": "Explore", "url": "/collections/aquatics" }}
+    ]
+  }]
+}
+{% endschema %}

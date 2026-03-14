@@ -1,0 +1,258 @@
+{% comment %} PAWFOLK — Marquee Announcement Bar {% endcomment %}
+
+<style>
+  .pf-announce {
+    background: {{ section.settings.bg_color }};
+    padding: {{ section.settings.bar_height }}px 0;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .pf-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: pf-marquee {{ section.settings.speed }}s linear infinite;
+  }
+
+  .pf-marquee-track:hover {
+    animation-play-state: {% if section.settings.pause_on_hover %}paused{% else %}running{% endif %};
+  }
+
+  @keyframes pf-marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .pf-marquee-group {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-shrink: 0;
+  }
+
+  .pf-marquee-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 32px;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: {{ section.settings.font_size }}px;
+    font-weight: 500;
+    color: {{ section.settings.text_color }};
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  .pf-marquee-divider {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: {{ section.settings.accent_color }};
+    flex-shrink: 0;
+  }
+
+  .pf-marquee-pill {
+    background: {{ section.settings.accent_color }};
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 100px;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+
+  .pf-marquee-highlight {
+    color: {{ section.settings.accent_color }};
+    font-weight: 700;
+  }
+</style>
+
+<div class="pf-announce" role="marquee" aria-label="Announcements">
+  <div class="pf-marquee-track" id="pf-marquee-track">
+
+    {%- comment -%} First copy {%- endcomment -%}
+    <div class="pf-marquee-group">
+      {% for block in section.blocks %}
+        <div class="pf-marquee-item" {{ block.shopify_attributes }}>
+          {% if block.settings.show_pill and block.settings.pill_text != blank %}
+            <span class="pf-marquee-pill">{{ block.settings.pill_text }}</span>
+          {% endif %}
+          {% if block.settings.icon != blank %}
+            <span style="font-size:14px">{{ block.settings.icon }}</span>
+          {% endif %}
+          <span>
+            {{ block.settings.text | replace: '[highlight]', '<span class="pf-marquee-highlight">' | replace: '[/highlight]', '</span>' }}
+          </span>
+        </div>
+        <div class="pf-marquee-divider"></div>
+      {% endfor %}
+    </div>
+
+    {%- comment -%} Duplicate for seamless loop {%- endcomment -%}
+    <div class="pf-marquee-group" aria-hidden="true">
+      {% for block in section.blocks %}
+        <div class="pf-marquee-item">
+          {% if block.settings.show_pill and block.settings.pill_text != blank %}
+            <span class="pf-marquee-pill">{{ block.settings.pill_text }}</span>
+          {% endif %}
+          {% if block.settings.icon != blank %}
+            <span style="font-size:14px">{{ block.settings.icon }}</span>
+          {% endif %}
+          <span>
+            {{ block.settings.text | replace: '[highlight]', '<span class="pf-marquee-highlight">' | replace: '[/highlight]', '</span>' }}
+          </span>
+        </div>
+        <div class="pf-marquee-divider"></div>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Pawfolk Marquee Bar",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#1B3A2D"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color (pills + highlights)",
+      "default": "#E8622A"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "label": "Scroll speed (lower = faster)",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 11,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "bar_height",
+      "min": 8,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Bar height (padding)",
+      "default": 12
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Announcement",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Emoji icon",
+          "default": "🐾"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Announcement text",
+          "info": "Wrap words in [highlight][/highlight] to color them. Example: Use code [highlight]PAWFOLK15[/highlight] for 15% off",
+          "default": "Free shipping on orders over [highlight]$49[/highlight]"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_pill",
+          "label": "Show pill badge",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "pill_text",
+          "label": "Pill badge text",
+          "default": "New"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pawfolk Marquee Bar",
+      "blocks": [
+        {
+          "type": "announcement",
+          "settings": {
+            "icon": "🐾",
+            "text": "Free shipping on orders over [highlight]$49[/highlight]",
+            "show_pill": false
+          }
+        },
+        {
+          "type": "announcement",
+          "settings": {
+            "icon": "✨",
+            "text": "Use code [highlight]PAWFOLK15[/highlight] for 15% off your first order",
+            "show_pill": true,
+            "pill_text": "Limited"
+          }
+        },
+        {
+          "type": "announcement",
+          "settings": {
+            "icon": "🚚",
+            "text": "All orders ship within [highlight]24 hours[/highlight]",
+            "show_pill": false
+          }
+        },
+        {
+          "type": "announcement",
+          "settings": {
+            "icon": "↩️",
+            "text": "[highlight]30-day[/highlight] hassle-free returns",
+            "show_pill": false
+          }
+        },
+        {
+          "type": "announcement",
+          "settings": {
+            "icon": "🏆",
+            "text": "Trusted by [highlight]12,000+[/highlight] pet families worldwide",
+            "show_pill": true,
+            "pill_text": "Top Rated"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

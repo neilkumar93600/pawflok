@@ -1,0 +1,263 @@
+{% comment %} PAWFOLK — Hero Section {% endcomment %}
+
+<style>
+.pf-hero {
+  min-height: 90vh;
+  display: grid;
+  grid-template-columns: 55% 45%;
+  overflow: hidden;
+  position: relative;
+  background: {{ section.settings.bg_color }};
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.pf-hero-left {
+  padding: 80px 60px 80px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.pf-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(232,98,42,.1);
+  border: 1px solid rgba(232,98,42,.25);
+  color: #E8622A;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  border-radius: 100px;
+  margin-bottom: 28px;
+  width: fit-content;
+}
+.pf-hero-eyebrow-dot {
+  width: 6px; height: 6px;
+  background: #E8622A;
+  border-radius: 50%;
+}
+.pf-hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(46px, 5.5vw, 74px);
+  color: {{ section.settings.heading_color }};
+  line-height: 1.05;
+  margin-bottom: 22px;
+  letter-spacing: -.01em;
+}
+.pf-hero h1 .pf-line-accent { color: #1B3A2D; }
+.pf-hero h1 em { font-style: italic; color: #E8622A; }
+.pf-hero-sub {
+  font-size: 17px;
+  color: #4A5E52;
+  line-height: 1.75;
+  max-width: 430px;
+  margin-bottom: 40px;
+}
+.pf-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 52px;
+}
+.pf-btn-primary {
+  background: #1B3A2D;
+  color: #fff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  padding: 15px 36px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background .2s, transform .15s;
+  display: inline-block;
+}
+.pf-btn-primary:hover { background: #2D5C45; transform: translateY(-2px); color: #fff; }
+.pf-btn-ghost {
+  color: #4A5E52;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: color .2s;
+}
+.pf-btn-ghost:hover { color: #1B3A2D; }
+.pf-play-circle {
+  width: 42px; height: 42px;
+  background: #fff;
+  border: 1.5px solid rgba(27,58,45,.22);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+.pf-hero-proof {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.pf-proof-avatars { display: flex; }
+.pf-proof-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 2.5px solid #fff;
+  background: #3D7A5E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  margin-left: -10px;
+}
+.pf-proof-avatar:first-child { margin-left: 0; }
+.pf-proof-stars { font-size: 13px; color: #E8622A; letter-spacing: 1px; }
+.pf-proof-text { font-size: 13px; color: #4A5E52; }
+.pf-proof-text strong { color: #111A14; font-weight: 600; }
+.pf-hero-right {
+  background: #1B3A2D;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pf-hero-pattern {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 70% 30%, rgba(232,98,42,.15) 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(61,122,94,.3) 0%, transparent 40%);
+}
+.pf-hero-right-inner {
+  position: relative; z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 40px;
+  gap: 20px;
+}
+.pf-hero-emoji { font-size: 130px; filter: drop-shadow(0 24px 48px rgba(0,0,0,.4)); }
+.pf-float-card {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 14px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 260px;
+}
+.pf-float-icon { font-size: 28px; }
+.pf-float-title { font-size: 13px; font-weight: 600; color: #fff; }
+.pf-float-sub { font-size: 11px; color: rgba(255,255,255,.5); margin-top: 1px; }
+.pf-hero-badge {
+  position: absolute;
+  bottom: 40px; right: 36px;
+  background: #E8622A;
+  color: #fff;
+  border-radius: 50%;
+  width: 86px; height: 86px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(12deg);
+}
+.pf-badge-num { font-size: 22px; font-weight: 700; line-height: 1; }
+.pf-badge-text { font-size: 9px; font-weight: 600; letter-spacing: .1em; text-align: center; margin-top: 2px; }
+@media (max-width: 768px) {
+  .pf-hero { grid-template-columns: 1fr; }
+  .pf-hero-right { min-height: 340px; }
+  .pf-hero-left { padding: 48px 24px; }
+}
+</style>
+
+<section class="pf-hero">
+  <div class="pf-hero-left">
+    <div class="pf-hero-eyebrow">
+      <div class="pf-hero-eyebrow-dot"></div>
+      {{ section.settings.eyebrow }}
+    </div>
+    <h1>
+      {{ section.settings.heading_line1 }}<br>
+      <span class="pf-line-accent">{{ section.settings.heading_line2 }}</span><br>
+      <em>{{ section.settings.heading_line3 }}</em>
+    </h1>
+    <p class="pf-hero-sub">{{ section.settings.subheading }}</p>
+    <div class="pf-hero-actions">
+      <a href="{{ section.settings.btn1_url }}" class="pf-btn-primary">{{ section.settings.btn1_text }}</a>
+      <a href="{{ section.settings.btn2_url }}" class="pf-btn-ghost">
+        <div class="pf-play-circle">▶</div>
+        {{ section.settings.btn2_text }}
+      </a>
+    </div>
+    <div class="pf-hero-proof">
+      <div class="pf-proof-avatars">
+        <div class="pf-proof-avatar">👩</div>
+        <div class="pf-proof-avatar">🧑</div>
+        <div class="pf-proof-avatar">👩</div>
+        <div class="pf-proof-avatar">👨</div>
+      </div>
+      <div>
+        <div class="pf-proof-stars">★★★★★</div>
+        <div class="pf-proof-text"><strong>{{ section.settings.rating }}</strong> {{ section.settings.review_count }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="pf-hero-right">
+    <div class="pf-hero-pattern"></div>
+    <div class="pf-hero-right-inner">
+      <div class="pf-hero-emoji">{{ section.settings.hero_emoji }}</div>
+      <div class="pf-float-card">
+        <div class="pf-float-icon">📦</div>
+        <div>
+          <div class="pf-float-title">{{ section.settings.float1_title }}</div>
+          <div class="pf-float-sub">{{ section.settings.float1_sub }}</div>
+        </div>
+      </div>
+      <div class="pf-float-card">
+        <div class="pf-float-icon">🏆</div>
+        <div>
+          <div class="pf-float-title">{{ section.settings.float2_title }}</div>
+          <div class="pf-float-sub">{{ section.settings.float2_sub }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="pf-hero-badge">
+      <div class="pf-badge-num">{{ section.settings.badge_num }}</div>
+      <div class="pf-badge-text">{{ section.settings.badge_text }}</div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pawfolk Hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow tag", "default": "Premium Pet Accessories" },
+    { "type": "text", "id": "heading_line1", "label": "Heading line 1", "default": "Give Your Pet" },
+    { "type": "text", "id": "heading_line2", "label": "Heading line 2 (accent)", "default": "A Life They" },
+    { "type": "text", "id": "heading_line3", "label": "Heading line 3 (italic)", "default": "Deserve." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Thoughtfully designed accessories for dogs, cats, and small pets — built to last, made to impress." },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#F7F3EE" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#111A14" },
+    { "type": "text", "id": "btn1_text", "label": "Button 1 text", "default": "Shop Collection" },
+    { "type": "url", "id": "btn1_url", "label": "Button 1 URL" },
+    { "type": "text", "id": "btn2_text", "label": "Button 2 text", "default": "Watch our story" },
+    { "type": "url", "id": "btn2_url", "label": "Button 2 URL" },
+    { "type": "text", "id": "rating", "label": "Rating text", "default": "4.9/5" },
+    { "type": "text", "id": "review_count", "label": "Review count text", "default": "from 3,200+ verified reviews" },
+    { "type": "text", "id": "hero_emoji", "label": "Hero emoji", "default": "🐕" },
+    { "type": "text", "id": "float1_title", "label": "Float card 1 title", "default": "Fast Dispatch" },
+    { "type": "text", "id": "float1_sub", "label": "Float card 1 subtitle", "default": "Ships within 24 hours" },
+    { "type": "text", "id": "float2_title", "label": "Float card 2 title", "default": "#1 Rated Pet Store" },
+    { "type": "text", "id": "float2_sub", "label": "Float card 2 subtitle", "default": "Best of 2025 Award" },
+    { "type": "text", "id": "badge_num", "label": "Badge number", "default": "200+" },
+    { "type": "text", "id": "badge_text", "label": "Badge text", "default": "Products Available" }
+  ],
+  "presets": [{ "name": "Pawfolk Hero" }]
+}
+{% endschema %}

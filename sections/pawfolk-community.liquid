@@ -1,0 +1,169 @@
+{% comment %} PAWFOLK — Community / UGC Instagram Grid {% endcomment %}
+
+<style>
+.pf-ugc {
+  padding: 96px 80px;
+  background: {{ section.settings.bg_color }};
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+.pf-ugc-head {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.pf-ugc-label {
+  display: inline-block;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: #E8622A; margin-bottom: 10px;
+}
+.pf-ugc-head h2 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(28px, 3.2vw, 44px);
+  color: #111A14; line-height: 1.15;
+}
+.pf-ugc-head p {
+  font-size: 16px; color: #4A5E52;
+  line-height: 1.75; margin-top: 12px;
+  max-width: 520px; margin-inline: auto;
+}
+.pf-ugc-head p strong { color: #111A14; }
+
+.pf-ugc-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-bottom: 32px;
+}
+.pf-ugc-item {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+.pf-ugc-item:hover { transform: scale(0.97); }
+
+.pf-ugc-item-inner {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  background-size: cover; background-position: center;
+}
+
+.pf-ugc-emoji { font-size: 64px; position: relative; z-index: 1; }
+
+.pf-ugc-overlay {
+  position: absolute; inset: 0;
+  background: rgba(27,58,45,0.65);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 6px;
+  opacity: 0; transition: opacity 0.25s;
+  color: #fff;
+}
+.pf-ugc-item:hover .pf-ugc-overlay { opacity: 1; }
+.pf-ugc-overlay-text {
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.pf-ugc-overlay-icon { font-size: 22px; }
+
+.pf-ugc-follow {
+  text-align: center;
+  font-size: 15px; color: #4A5E52;
+}
+.pf-ugc-follow a {
+  color: #1B3A2D; font-weight: 600;
+  text-decoration: none; transition: color 0.2s;
+}
+.pf-ugc-follow a:hover { color: #E8622A; }
+
+.pf-ugc-hashtag-pill {
+  display: inline-block;
+  background: rgba(232,98,42,0.10);
+  color: #E8622A;
+  font-size: 14px; font-weight: 700;
+  padding: 4px 14px; border-radius: 100px;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .pf-ugc { padding: 60px 24px; }
+  .pf-ugc-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+}
+@media (max-width: 480px) {
+  .pf-ugc-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+
+<section class="pf-ugc">
+  <div class="pf-ugc-head">
+    <div class="pf-ugc-label">{{ section.settings.label }}</div>
+    <h2>{{ section.settings.heading }}</h2>
+    <p>{{ section.settings.subheading | replace: section.settings.hashtag, '<strong>' | append: '' }}
+      Share your Pawfolk moments using <a href="{{ section.settings.hashtag_url }}" class="pf-ugc-hashtag-pill">{{ section.settings.hashtag }}</a> and get featured here.
+    </p>
+  </div>
+
+  <div class="pf-ugc-grid">
+    {% for block in section.blocks %}
+      <div class="pf-ugc-item" {{ block.shopify_attributes }}>
+        <div class="pf-ugc-item-inner" style="background-color: {{ block.settings.bg_color }};{% if block.settings.image != blank %} background-image: url('{{ block.settings.image | image_url: width: 600 }}');{% endif %}">
+          {% unless block.settings.image != blank %}
+            <div class="pf-ugc-emoji">{{ block.settings.emoji }}</div>
+          {% endunless %}
+        </div>
+        <div class="pf-ugc-overlay">
+          <div class="pf-ugc-overlay-icon">🛍️</div>
+          <div class="pf-ugc-overlay-text">{{ section.settings.overlay_text }}</div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <p class="pf-ugc-follow">
+    Follow us <a href="{{ section.settings.instagram_url }}">{{ section.settings.instagram_handle }}</a> &nbsp;·&nbsp;
+    Tag <a href="{{ section.settings.hashtag_url }}">{{ section.settings.hashtag }}</a> to be featured
+  </p>
+</section>
+
+{% schema %}
+{
+  "name": "Pawfolk Community Grid",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#FFFFFF" },
+    { "type": "text", "id": "label", "label": "Section label", "default": "Community" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Real Pets. Real Smiles." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading (shown above hashtag)", "default": "Share your Pawfolk moments and get featured here." },
+    { "type": "text", "id": "hashtag", "label": "Hashtag", "default": "#PawfolkPets" },
+    { "type": "url", "id": "hashtag_url", "label": "Hashtag URL (Instagram search)" },
+    { "type": "text", "id": "instagram_handle", "label": "Instagram handle", "default": "@PawfolkStore" },
+    { "type": "url", "id": "instagram_url", "label": "Instagram profile URL" },
+    { "type": "text", "id": "overlay_text", "label": "Hover overlay text", "default": "Shop This Look" }
+  ],
+  "blocks": [
+    {
+      "type": "ugc_photo",
+      "name": "Photo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo (optional — uses emoji if blank)" },
+        { "type": "text", "id": "emoji", "label": "Emoji placeholder", "default": "🐕" },
+        { "type": "color", "id": "bg_color", "label": "Background color", "default": "#EDE7DC" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Pawfolk Community Grid",
+    "blocks": [
+      { "type": "ugc_photo", "settings": { "emoji": "🐕", "bg_color": "#EDE7DC" }},
+      { "type": "ugc_photo", "settings": { "emoji": "🐈", "bg_color": "#D4E8DC" }},
+      { "type": "ugc_photo", "settings": { "emoji": "🐩", "bg_color": "#E8D4CC" }},
+      { "type": "ugc_photo", "settings": { "emoji": "🦜", "bg_color": "#D4D8E8" }},
+      { "type": "ugc_photo", "settings": { "emoji": "🐈‍⬛", "bg_color": "#E8E4D4" }}
+    ]
+  }]
+}
+{% endschema %}

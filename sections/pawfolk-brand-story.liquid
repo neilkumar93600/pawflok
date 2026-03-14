@@ -1,0 +1,145 @@
+{% comment %} PAWFOLK — Brand Story Section {% endcomment %}
+
+<style>
+.pf-story {
+  padding: {{ section.settings.padding_top }}px 80px {{ section.settings.padding_bottom }}px;
+  background: #fff;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.pf-story-img {
+  border-radius: 16px;
+  background: #1B3A2D;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.pf-story-img-pattern {
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 40% 50%, rgba(232,98,42,.2) 0%, transparent 60%);
+}
+.pf-story-emoji {
+  position: relative; z-index: 2;
+  font-size: 110px;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,.3));
+}
+.pf-story-year {
+  position: absolute; bottom: 28px; left: 28px;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 8px; padding: 10px 16px; color: #fff;
+}
+.pf-story-year-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px; font-weight: 700; line-height: 1;
+}
+.pf-story-year-text { font-size: 11px; opacity: .6; margin-top: 2px; }
+.pf-story-label {
+  display: inline-block;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: #E8622A; margin-bottom: 10px;
+}
+.pf-story-content h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 3.2vw, 44px);
+  color: #111A14; line-height: 1.15; margin-bottom: 20px;
+}
+.pf-story-content p {
+  font-size: 16px; color: #4A5E52;
+  line-height: 1.8; margin-bottom: 16px;
+}
+.pf-story-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  background: rgba(27,58,45,.12);
+  border: 1px solid rgba(27,58,45,.12);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 32px 0;
+}
+.pf-story-stat { background: #F7F3EE; padding: 22px 20px; text-align: center; }
+.pf-stat-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px; font-weight: 700;
+  color: #1B3A2D; line-height: 1;
+}
+.pf-stat-l { font-size: 11px; color: #8A9E92; margin-top: 4px; letter-spacing: .04em; }
+.pf-btn-story {
+  display: inline-block;
+  background: #1B3A2D; color: #fff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px; font-weight: 600; letter-spacing: .05em;
+  padding: 14px 32px; border-radius: 8px;
+  transition: background .2s; text-decoration: none;
+}
+.pf-btn-story:hover { background: #2D5C45; color: #fff; }
+@media (max-width: 768px) {
+  .pf-story { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; }
+}
+</style>
+
+<section class="pf-story">
+  <div class="pf-story-img">
+    <div class="pf-story-img-pattern"></div>
+    <div class="pf-story-emoji">{{ section.settings.image_emoji }}</div>
+    <div class="pf-story-year">
+      <div class="pf-story-year-num">{{ section.settings.founded_year }}</div>
+      <div class="pf-story-year-text">{{ section.settings.founded_text }}</div>
+    </div>
+  </div>
+  <div class="pf-story-content">
+    <div class="pf-story-label">{{ section.settings.label }}</div>
+    <h2>{{ section.settings.heading }}</h2>
+    <p>{{ section.settings.paragraph1 }}</p>
+    <p>{{ section.settings.paragraph2 }}</p>
+    <div class="pf-story-stats">
+      <div class="pf-story-stat">
+        <div class="pf-stat-n">{{ section.settings.stat1_num }}</div>
+        <div class="pf-stat-l">{{ section.settings.stat1_label }}</div>
+      </div>
+      <div class="pf-story-stat">
+        <div class="pf-stat-n">{{ section.settings.stat2_num }}</div>
+        <div class="pf-stat-l">{{ section.settings.stat2_label }}</div>
+      </div>
+      <div class="pf-story-stat">
+        <div class="pf-stat-n">{{ section.settings.stat3_num }}</div>
+        <div class="pf-stat-l">{{ section.settings.stat3_label }}</div>
+      </div>
+    </div>
+    <a href="{{ section.settings.btn_url }}" class="pf-btn-story">{{ section.settings.btn_text }}</a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pawfolk Brand Story",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Section label", "default": "Our Story" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Born from a Dog Walk. Built for Every Pet." },
+    { "type": "textarea", "id": "paragraph1", "label": "Paragraph 1", "default": "Pawfolk started when our founder couldn't find a collar that was both beautiful and built to last. Tired of flimsy products with toxic dyes, she set out to create something better — and never looked back." },
+    { "type": "textarea", "id": "paragraph2", "label": "Paragraph 2", "default": "Today we offer 200+ products trusted by pet families across 35 countries, all made to the same uncompromising standard: safe, durable, and genuinely beautiful." },
+    { "type": "text", "id": "image_emoji", "label": "Image emoji", "default": "🐾" },
+    { "type": "text", "id": "founded_year", "label": "Founded year", "default": "2019" },
+    { "type": "text", "id": "founded_text", "label": "Founded label", "default": "Founded with love" },
+    { "type": "text", "id": "stat1_num", "label": "Stat 1 number", "default": "12K+" },
+    { "type": "text", "id": "stat1_label", "label": "Stat 1 label", "default": "Happy Pets" },
+    { "type": "text", "id": "stat2_num", "label": "Stat 2 number", "default": "35" },
+    { "type": "text", "id": "stat2_label", "label": "Stat 2 label", "default": "Countries" },
+    { "type": "text", "id": "stat3_num", "label": "Stat 3 number", "default": "4.9★" },
+    { "type": "text", "id": "stat3_label", "label": "Stat 3 label", "default": "Average Rating" },
+    { "type": "text", "id": "btn_text", "label": "Button text", "default": "Read Our Full Story →" },
+    { "type": "url", "id": "btn_url", "label": "Button URL" },
+    { "type": "range", "id": "padding_top", "min": 40, "max": 120, "step": 8, "unit": "px", "label": "Top padding", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "min": 40, "max": 120, "step": 8, "unit": "px", "label": "Bottom padding", "default": 96 }
+  ],
+  "presets": [{ "name": "Pawfolk Brand Story" }]
+}
+{% endschema %}

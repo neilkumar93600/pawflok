@@ -1,0 +1,147 @@
+{% comment %} PAWFOLK — Newsletter Section {% endcomment %}
+
+<style>
+.pf-newsletter {
+  background: #1B3A2D;
+  padding: {{ section.settings.padding_top }}px 80px {{ section.settings.padding_bottom }}px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.pf-nl-label {
+  display: inline-block;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(232,98,42,.9); margin-bottom: 10px;
+}
+.pf-nl-left h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 3.2vw, 44px);
+  color: #fff; line-height: 1.15; margin-bottom: 12px;
+}
+.pf-nl-left p {
+  font-size: 16px; color: rgba(255,255,255,.5);
+  line-height: 1.75; margin-bottom: 24px;
+}
+.pf-nl-perks { display: flex; flex-direction: column; gap: 12px; }
+.pf-nl-perk {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; color: rgba(255,255,255,.65);
+}
+.pf-nl-perk-dot {
+  width: 20px; height: 20px;
+  background: rgba(232,98,42,.2);
+  border: 1px solid rgba(232,98,42,.4);
+  border-radius: 50%;
+  display: flex; align-items: center;
+  justify-content: center; font-size: 10px;
+  flex-shrink: 0; color: #E8622A;
+}
+.pf-nl-right {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 16px; padding: 44px;
+}
+.pf-nl-offer {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px; font-weight: 700;
+  color: #E8622A; line-height: 1; margin-bottom: 6px;
+  display: block;
+}
+.pf-nl-offer-text { font-size: 15px; color: rgba(255,255,255,.5); margin-bottom: 28px; }
+.pf-nl-form { display: flex; flex-direction: column; gap: 12px; }
+{% form 'customer' %}{% endform %}
+.pf-nl-input {
+  padding: 14px 18px;
+  background: rgba(255,255,255,.08);
+  border: 1.5px solid rgba(255,255,255,.15);
+  border-radius: 8px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px; color: #fff; outline: none;
+  transition: border-color .2s; width: 100%;
+}
+.pf-nl-input::placeholder { color: rgba(255,255,255,.3); }
+.pf-nl-input:focus { border-color: rgba(232,98,42,.5); }
+.pf-nl-btn {
+  background: #E8622A; color: #fff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px; font-weight: 700;
+  letter-spacing: .06em; padding: 15px;
+  border-radius: 8px; border: none;
+  cursor: pointer; transition: background .2s;
+  width: 100%;
+}
+.pf-nl-btn:hover { background: #F07A45; }
+.pf-nl-disclaimer {
+  font-size: 11px; color: rgba(255,255,255,.25);
+  text-align: center; margin-top: 8px;
+}
+@media (max-width: 768px) {
+  .pf-newsletter { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; }
+}
+</style>
+
+<section class="pf-newsletter">
+  <div class="pf-nl-left">
+    <div class="pf-nl-label">{{ section.settings.label }}</div>
+    <h2>{{ section.settings.heading }}</h2>
+    <p>{{ section.settings.subheading }}</p>
+    <div class="pf-nl-perks">
+      {% for block in section.blocks %}
+        <div class="pf-nl-perk" {{ block.shopify_attributes }}>
+          <div class="pf-nl-perk-dot">✓</div>
+          {{ block.settings.perk_text }}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="pf-nl-right">
+    <span class="pf-nl-offer">{{ section.settings.offer }}</span>
+    <div class="pf-nl-offer-text">{{ section.settings.offer_sub }}</div>
+    {% form 'customer', id: 'pawfolk-newsletter' %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <div class="pf-nl-form">
+        <input class="pf-nl-input" type="text" name="contact[first_name]" placeholder="Your first name">
+        <input class="pf-nl-input" type="email" name="contact[email]" placeholder="Your email address" required>
+        <button class="pf-nl-btn" type="submit">{{ section.settings.btn_text }}</button>
+      </div>
+    {% endform %}
+    <div class="pf-nl-disclaimer">{{ section.settings.disclaimer }}</div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pawfolk Newsletter",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Section label", "default": "Join the Family" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Get 15% Off Your First Order" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Join 40,000+ pet parents who get exclusive deals, new arrivals, and expert pet care tips every week." },
+    { "type": "text", "id": "offer", "label": "Offer text", "default": "15% OFF" },
+    { "type": "text", "id": "offer_sub", "label": "Offer subtitle", "default": "your first order when you join" },
+    { "type": "text", "id": "btn_text", "label": "Button text", "default": "Claim My 15% Discount →" },
+    { "type": "text", "id": "disclaimer", "label": "Disclaimer", "default": "🔒 No spam, ever. Unsubscribe in one click." },
+    { "type": "range", "id": "padding_top", "min": 40, "max": 120, "step": 8, "unit": "px", "label": "Top padding", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "min": 40, "max": 120, "step": 8, "unit": "px", "label": "Bottom padding", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "perk",
+      "name": "Perk",
+      "settings": [
+        { "type": "text", "id": "perk_text", "label": "Perk text", "default": "Exclusive member-only discounts" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Pawfolk Newsletter",
+    "blocks": [
+      { "type": "perk", "settings": { "perk_text": "Exclusive member-only discounts" }},
+      { "type": "perk", "settings": { "perk_text": "First access to new product launches" }},
+      { "type": "perk", "settings": { "perk_text": "Free pet care guides & vet tips" }}
+    ]
+  }]
+}
+{% endschema %}

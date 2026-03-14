@@ -1,0 +1,561 @@
+{% comment %} PAWFOLK — Custom Footer Section {% endcomment %}
+
+<style>
+  .pf-footer {
+    background: {{ section.settings.bg_color }};
+    padding: 72px 80px 32px;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+
+  .pf-footer-top {
+    display: grid;
+    grid-template-columns: 2.2fr 1fr 1fr 1fr;
+    gap: 52px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    margin-bottom: 28px;
+  }
+
+  /* Brand column */
+  .pf-footer-brand {}
+
+  .pf-footer-logo {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+    display: block;
+    text-decoration: none;
+  }
+
+  .pf-footer-logo span {
+    color: {{ section.settings.accent_color }};
+  }
+
+  .pf-footer-desc {
+    font-size: 14px;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 24px;
+    max-width: 280px;
+  }
+
+  /* Social icons */
+  .pf-footer-socials {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+
+  .pf-social-btn {
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+    font-size: 16px;
+  }
+
+  .pf-social-btn:hover {
+    border-color: {{ section.settings.accent_color }};
+    background: rgba(232,98,42,0.1);
+  }
+
+  /* Newsletter mini */
+  .pf-footer-nl-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 10px;
+  }
+
+  .pf-footer-nl-form {
+    display: flex;
+    gap: 0;
+  }
+
+  .pf-footer-nl-input {
+    flex: 1;
+    padding: 11px 14px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-right: none;
+    border-radius: 6px 0 0 6px;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 13px;
+    color: #fff;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .pf-footer-nl-input::placeholder {
+    color: rgba(255,255,255,0.25);
+  }
+
+  .pf-footer-nl-input:focus {
+    border-color: rgba(232,98,42,0.4);
+  }
+
+  .pf-footer-nl-btn {
+    background: {{ section.settings.accent_color }};
+    color: #fff;
+    border: none;
+    padding: 11px 16px;
+    border-radius: 0 6px 6px 0;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+
+  .pf-footer-nl-btn:hover {
+    background: #F07A45;
+  }
+
+  /* Link columns */
+  .pf-footer-col {}
+
+  .pf-footer-col-heading {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+  }
+
+  .pf-footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .pf-footer-links a {
+    font-size: 14px;
+    color: rgba(255,255,255,0.38);
+    text-decoration: none;
+    transition: color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .pf-footer-links a:hover {
+    color: {{ section.settings.accent_color }};
+  }
+
+  /* Trust badges row */
+  .pf-footer-trust {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .pf-footer-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .pf-footer-trust-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+  }
+
+  /* Bottom bar */
+  .pf-footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .pf-footer-copy {
+    font-size: 13px;
+    color: rgba(255,255,255,0.2);
+  }
+
+  .pf-footer-copy a {
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .pf-footer-copy a:hover {
+    color: {{ section.settings.accent_color }};
+  }
+
+  .pf-footer-payments {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .pf-pay-pill {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .pf-footer-legal-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .pf-footer-legal-links a {
+    font-size: 12px;
+    color: rgba(255,255,255,0.2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .pf-footer-legal-links a:hover {
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .pf-footer-top {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .pf-footer {
+      padding: 52px 24px 28px;
+    }
+    .pf-footer-top {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+    .pf-footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .pf-footer-trust {
+      gap: 12px;
+    }
+  }
+</style>
+
+<footer class="pf-footer">
+
+  <div class="pf-footer-top">
+
+    {%- comment -%} Brand Column {%- endcomment -%}
+    <div class="pf-footer-brand">
+      <a href="/" class="pf-footer-logo">
+        {{ section.settings.logo_text | split: '|' | first }}<span>{{ section.settings.logo_text | split: '|' | last }}</span>
+      </a>
+      <p class="pf-footer-desc">{{ section.settings.brand_desc }}</p>
+
+      <div class="pf-footer-socials">
+        {% if section.settings.social_instagram != blank %}
+          <a href="{{ section.settings.social_instagram }}" class="pf-social-btn" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="rgba(255,255,255,0.6)" stroke="none"/></svg>
+          </a>
+        {% endif %}
+        {% if section.settings.social_facebook != blank %}
+          <a href="{{ section.settings.social_facebook }}" class="pf-social-btn" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        {% endif %}
+        {% if section.settings.social_tiktok != blank %}
+          <a href="{{ section.settings.social_tiktok }}" class="pf-social-btn" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,255,255,0.6)"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+          </a>
+        {% endif %}
+        {% if section.settings.social_youtube != blank %}
+          <a href="{{ section.settings.social_youtube }}" class="pf-social-btn" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.8"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="rgba(255,255,255,0.6)" stroke="none"/></svg>
+          </a>
+        {% endif %}
+        {% if section.settings.social_pinterest != blank %}
+          <a href="{{ section.settings.social_pinterest }}" class="pf-social-btn" target="_blank" rel="noopener" aria-label="Pinterest">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.8"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.04-2.83.18-.77 1.22-5.17 1.22-5.17s-.31-.62-.31-1.55c0-1.45.84-2.54 1.89-2.54.89 0 1.32.67 1.32 1.47 0 .9-.57 2.24-.87 3.48-.25 1.04.52 1.89 1.54 1.89 1.85 0 3.09-2.37 3.09-5.17 0-2.14-1.44-3.64-3.5-3.64-2.38 0-3.78 1.79-3.78 3.63 0 .72.28 1.49.62 1.91.07.08.08.15.06.23-.06.26-.2.84-.23.95-.04.15-.13.18-.3.11-1.12-.52-1.82-2.17-1.82-3.49 0-2.84 2.06-5.44 5.94-5.44 3.12 0 5.55 2.22 5.55 5.19 0 3.1-1.95 5.59-4.66 5.59-.91 0-1.77-.47-2.06-1.03l-.56 2.08c-.2.78-.75 1.76-1.12 2.35.85.26 1.74.4 2.67.4 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+          </a>
+        {% endif %}
+      </div>
+
+      {%- comment -%} Mini newsletter {%- endcomment -%}
+      {% if section.settings.show_newsletter %}
+        <div class="pf-footer-nl-label">{{ section.settings.nl_label }}</div>
+        {% form 'customer', id: 'pawfolk-footer-newsletter' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="pf-footer-nl-form">
+            <input
+              class="pf-footer-nl-input"
+              type="email"
+              name="contact[email]"
+              placeholder="{{ section.settings.nl_placeholder }}"
+              required
+            >
+            <button class="pf-footer-nl-btn" type="submit">→</button>
+          </div>
+        {% endform %}
+      {% endif %}
+    </div>
+
+    {%- comment -%} Link Columns {%- endcomment -%}
+    {% for block in section.blocks %}
+      {% if block.type == 'link_column' %}
+        <div class="pf-footer-col" {{ block.shopify_attributes }}>
+          <div class="pf-footer-col-heading">{{ block.settings.heading }}</div>
+          <ul class="pf-footer-links">
+            {% assign links = block.settings.links_list %}
+            {% if linklists[block.settings.menu] != blank %}
+              {% for link in linklists[block.settings.menu].links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {% endfor %}
+            {% else %}
+              {% assign rows = block.settings.manual_links | newline_to_br | split: '<br />' %}
+              {% for row in rows %}
+                {% assign parts = row | strip | split: '|' %}
+                {% if parts.size == 2 %}
+                  <li><a href="{{ parts[1] | strip }}">{{ parts[0] | strip }}</a></li>
+                {% elsif parts.size == 1 and parts[0] != blank %}
+                  <li><a href="#">{{ parts[0] | strip }}</a></li>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          </ul>
+        </div>
+      {% endif %}
+    {% endfor %}
+
+  </div>
+
+  {%- comment -%} Trust row {%- endcomment -%}
+  {% if section.settings.show_trust_row %}
+    <div class="pf-footer-trust">
+      {% assign trust_items = section.settings.trust_items | split: ',' %}
+      {% for item in trust_items %}
+        <div class="pf-footer-trust-item">{{ item | strip }}</div>
+        {% unless forloop.last %}
+          <div class="pf-footer-trust-dot"></div>
+        {% endunless %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {%- comment -%} Bottom bar {%- endcomment -%}
+  <div class="pf-footer-bottom">
+    <div class="pf-footer-copy">
+      © {{ 'now' | date: '%Y' }} {{ section.settings.brand_name }}. All rights reserved.
+      &nbsp;·&nbsp;
+      <a href="/policies/privacy-policy">Privacy</a>
+      &nbsp;·&nbsp;
+      <a href="/policies/terms-of-service">Terms</a>
+    </div>
+
+    <div class="pf-footer-payments">
+      {% assign payments = section.settings.payment_methods | split: ',' %}
+      {% for method in payments %}
+        <div class="pf-pay-pill">{{ method | strip }}</div>
+      {% endfor %}
+    </div>
+  </div>
+
+</footer>
+
+{% schema %}
+{
+  "name": "Pawfolk Footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#111A14"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#E8622A"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text (use | to split color)",
+      "info": "Example: PAW|FOLK — PAW stays white, FOLK turns coral",
+      "default": "PAW|FOLK"
+    },
+    {
+      "type": "textarea",
+      "id": "brand_desc",
+      "label": "Brand description",
+      "default": "Premium pet accessories crafted for comfort, style, and the unconditional love of animals. Trusted by 12,000+ pet families in 35 countries."
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name (for copyright)",
+      "default": "Pawfolk Ltd"
+    },
+    {
+      "type": "header",
+      "content": "Social media"
+    },
+    {
+      "type": "url",
+      "id": "social_instagram",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "social_facebook",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "social_tiktok",
+      "label": "TikTok URL"
+    },
+    {
+      "type": "url",
+      "id": "social_youtube",
+      "label": "YouTube URL"
+    },
+    {
+      "type": "url",
+      "id": "social_pinterest",
+      "label": "Pinterest URL"
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_newsletter",
+      "label": "Show newsletter form",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "nl_label",
+      "label": "Newsletter label",
+      "default": "Join 40,000+ pet parents"
+    },
+    {
+      "type": "text",
+      "id": "nl_placeholder",
+      "label": "Input placeholder",
+      "default": "Enter your email"
+    },
+    {
+      "type": "header",
+      "content": "Trust row"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_row",
+      "label": "Show trust row",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "trust_items",
+      "label": "Trust items (comma separated)",
+      "default": "🚚 Free Shipping over $49, ↩️ 30-Day Returns, 🔒 Secure Checkout, 🧪 Vet Approved, 🏆 1-Year Warranty"
+    },
+    {
+      "type": "header",
+      "content": "Payment methods"
+    },
+    {
+      "type": "text",
+      "id": "payment_methods",
+      "label": "Payment methods (comma separated)",
+      "default": "VISA, MC, AMEX, PayPal, Apple Pay, Klarna"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link_column",
+      "name": "Link column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Column heading",
+          "default": "Shop"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Select menu",
+          "info": "Select a menu OR use manual links below"
+        },
+        {
+          "type": "textarea",
+          "id": "manual_links",
+          "label": "Manual links",
+          "info": "One per line. Format: Link Name | /url — e.g. All Products | /collections/all",
+          "default": "All Products | /collections/all\nDog Accessories | /collections/dogs\nCat Accessories | /collections/cats\nSale Items | /collections/sale"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pawfolk Footer",
+      "blocks": [
+        {
+          "type": "link_column",
+          "settings": {
+            "heading": "Shop",
+            "manual_links": "All Products | /collections/all\nDog Accessories | /collections/dogs\nCat Accessories | /collections/cats\nSmall Pets | /collections/small-pets\nSale Items | /collections/sale\nNew Arrivals | /collections/new-arrivals"
+          }
+        },
+        {
+          "type": "link_column",
+          "settings": {
+            "heading": "Help",
+            "manual_links": "FAQ | /pages/faq\nShipping & Returns | /pages/shipping-returns\nTrack Your Order | /pages/track-order\nContact Us | /pages/contact-us\nSize Guide | /pages/size-guide"
+          }
+        },
+        {
+          "type": "link_column",
+          "settings": {
+            "heading": "Company",
+            "manual_links": "About Pawfolk | /pages/about-us\nOur Mission | /pages/about-us\nPet Blog | /blogs/news\nSustainability | /pages/sustainability\nWholesale | /pages/wholesale"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

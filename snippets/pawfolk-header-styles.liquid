@@ -1,0 +1,179 @@
+{% comment %}
+  PAWFOLK — Header Style Overrides
+  
+  HOW TO INSTALL:
+  1. Go to Edit code → Snippets folder
+  2. Click "Add a new snippet"
+  3. Name it: pawfolk-header-styles
+  4. Paste this entire file → Save
+  5. Then open layout/theme.liquid
+  6. Find the line: {%- render 'stylesheets' -%}
+  7. Add this line directly below it: {%- render 'pawfolk-header-styles' -%}
+{% endcomment %}
+
+<style>
+  /* ─── PAWFOLK HEADER OVERRIDES ─── */
+
+  /* Main header background */
+  header-component,
+  .header,
+  .header-wrapper,
+  [class*="header"] {
+    background-color: #FFFFFF !important;
+    border-bottom: 1px solid rgba(27,58,45,0.10) !important;
+  }
+
+  /* Sticky header */
+  .header--sticky,
+  header-component[sticky],
+  .shopify-section-group-header-group {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 100 !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* Logo text — if no image uploaded */
+  .header__heading-link,
+  .header__heading a,
+  [class*="header__heading"] {
+    font-family: 'Cormorant Garamond', Georgia, serif !important;
+    font-size: 26px !important;
+    font-weight: 700 !important;
+    color: #1B3A2D !important;
+    letter-spacing: -0.02em !important;
+    text-decoration: none !important;
+  }
+
+  /* Nav links */
+  .header__inline-menu a,
+  .header__menu-item,
+  .header__menu-item a,
+  [class*="header__menu"] a {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+    font-size: 13.5px !important;
+    font-weight: 500 !important;
+    color: #4A5E52 !important;
+    letter-spacing: 0.02em !important;
+    transition: color 0.2s ease !important;
+    text-decoration: none !important;
+  }
+
+  .header__inline-menu a:hover,
+  .header__menu-item:hover,
+  .header__menu-item a:hover,
+  [class*="header__menu"] a:hover {
+    color: #1B3A2D !important;
+  }
+
+  /* Active nav link */
+  .header__menu-item--active a,
+  .header__active-menu-item {
+    color: #E8622A !important;
+  }
+
+  /* Header icons (search, cart, account) */
+  .header__icon,
+  .header__icon svg,
+  [class*="header__icon"] {
+    color: #111A14 !important;
+    stroke: #111A14 !important;
+  }
+
+  .header__icon:hover svg,
+  [class*="header__icon"]:hover svg {
+    stroke: #1B3A2D !important;
+    color: #1B3A2D !important;
+  }
+
+  /* Cart count bubble */
+  .cart-count-bubble,
+  [class*="cart-count"] {
+    background: #E8622A !important;
+    color: #FFFFFF !important;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+  }
+
+  /* Dropdown mega menu */
+  .header__submenu,
+  .mega-menu,
+  [class*="submenu"],
+  [class*="mega-menu"] {
+    background: #FFFFFF !important;
+    border: 1px solid rgba(27,58,45,0.10) !important;
+    border-top: 2px solid #1B3A2D !important;
+    border-radius: 0 0 12px 12px !important;
+    box-shadow: 0 16px 40px rgba(27,58,45,0.08) !important;
+  }
+
+  .header__submenu a,
+  .mega-menu a,
+  [class*="submenu"] a,
+  [class*="mega-menu"] a {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+    font-size: 14px !important;
+    color: #4A5E52 !important;
+    transition: color 0.15s ease !important;
+  }
+
+  .header__submenu a:hover,
+  .mega-menu a:hover,
+  [class*="submenu"] a:hover,
+  [class*="mega-menu"] a:hover {
+    color: #E8622A !important;
+  }
+
+  /* Mobile hamburger menu button */
+  .header__icon--menu,
+  [class*="menu-toggle"],
+  [class*="hamburger"] {
+    color: #111A14 !important;
+  }
+
+  /* Mobile drawer */
+  #MobileMenuDrawer,
+  .mobile-menu-drawer,
+  [id*="mobile-menu"],
+  [class*="mobile-menu"] {
+    background: #F7F3EE !important;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+  }
+
+  #MobileMenuDrawer a,
+  .mobile-menu-drawer a,
+  [class*="mobile-menu"] a {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+    color: #111A14 !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+  }
+
+  #MobileMenuDrawer a:hover,
+  [class*="mobile-menu"] a:hover {
+    color: #E8622A !important;
+  }
+
+  /* Search bar */
+  .search-modal,
+  [class*="search-modal"],
+  predictive-search {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+  }
+
+  .search-modal input,
+  [class*="search"] input {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+    border-color: rgba(27,58,45,0.20) !important;
+    border-radius: 8px !important;
+  }
+
+  .search-modal input:focus,
+  [class*="search"] input:focus {
+    border-color: #1B3A2D !important;
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(27,58,45,0.08) !important;
+  }
+</style>

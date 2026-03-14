@@ -1,0 +1,326 @@
+<!doctype html>
+<html
+  {% if request.design_mode %}
+    class="shopify-design-mode"
+  {% endif %}
+  lang="{{ request.locale.iso_code }}"
+>
+  <head>
+    {%- if settings.favicon != blank -%}
+      <link
+        rel="icon"
+        type="image/png"
+        href="{{ settings.favicon | image_url: width: 32, height: 32 }}"
+      >
+    {%- endif -%}
+
+    {% comment %} This a way to wait for main content to load when navigating to a new page so that the view transitions can work consistently {% endcomment %}
+    {% if settings.transition_to_main_product or settings.page_transition_enabled %}
+      <link
+        rel="expect"
+        href="#MainContent"
+        blocking="render"
+        id="view-transition-render-blocker"
+      >
+    {% endif %}
+
+    {%- render 'meta-tags' -%}
+    {%- render 'stylesheets' -%}
+    {%- render 'fonts' -%}
+    {%- render 'scripts' -%}
+    {%- render 'theme-styles-variables' -%}
+    {%- render 'color-schemes' -%}
+
+    {% if request.design_mode %}
+      {%- render 'theme-editor' -%}
+    {% endif %}
+
+    {{ content_for_header }}
+
+    {% comment %} =============================================
+      PAWFOLK CUSTOM ADDITIONS — DO NOT REMOVE
+    ============================================= {% endcomment %}
+
+    {% comment %} Google Fonts — Cormorant Garamond (headings) + Plus Jakarta Sans (body) {% endcomment %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    >
+
+    {% comment %} Pawfolk Global CSS Variables + Base Styles {% endcomment %}
+    <style>
+      :root {
+        --pf-forest:       #1B3A2D;
+        --pf-forest-mid:   #2D5C45;
+        --pf-forest-light: #3D7A5E;
+        --pf-sand:         #F7F3EE;
+        --pf-sand-dark:    #EDE7DC;
+        --pf-sand-deeper:  #DDD5C8;
+        --pf-coral:        #E8622A;
+        --pf-coral-light:  #F07A45;
+        --pf-coral-pale:   #FDF0EA;
+        --pf-white:        #FFFFFF;
+        --pf-ink:          #111A14;
+        --pf-ink-mid:      #2A3D31;
+        --pf-body:         #4A5E52;
+        --pf-muted:        #8A9E92;
+        --pf-border:       rgba(27,58,45,0.12);
+        --pf-border-strong:rgba(27,58,45,0.22);
+        --pf-font-heading: 'Cormorant Garamond', Georgia, serif;
+        --pf-font-body:    'Plus Jakarta Sans', system-ui, sans-serif;
+      }
+
+      /* Apply Pawfolk fonts globally */
+      body {
+        font-family: var(--pf-font-body);
+        background-color: var(--pf-sand);
+        color: var(--pf-ink);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        font-family: var(--pf-font-heading);
+        letter-spacing: -0.01em;
+      }
+
+      /* Smooth scrolling */
+      html { scroll-behavior: smooth; }
+
+      /* Global link style */
+      a { transition: color 0.2s ease; }
+
+      /* Global button base */
+      .pf-btn {
+        font-family: var(--pf-font-body);
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        border-radius: 6px;
+        transition: background 0.2s ease, transform 0.15s ease, color 0.2s ease;
+        display: inline-block;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .pf-btn:hover { transform: translateY(-2px); }
+
+      .pf-btn-primary {
+        background: var(--pf-forest);
+        color: #fff;
+        padding: 14px 32px;
+        font-size: 14px;
+      }
+      .pf-btn-primary:hover { background: var(--pf-forest-mid); color: #fff; }
+
+      .pf-btn-coral {
+        background: var(--pf-coral);
+        color: #fff;
+        padding: 14px 32px;
+        font-size: 14px;
+      }
+      .pf-btn-coral:hover { background: var(--pf-coral-light); color: #fff; }
+
+      .pf-btn-outline {
+        background: transparent;
+        color: var(--pf-forest);
+        border: 1.5px solid var(--pf-forest);
+        padding: 13px 32px;
+        font-size: 14px;
+      }
+      .pf-btn-outline:hover { background: var(--pf-forest); color: #fff; }
+
+      /* Section label (small uppercase tag above headings) */
+      .pf-section-label {
+        display: inline-block;
+        font-family: var(--pf-font-body);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--pf-coral);
+        margin-bottom: 10px;
+      }
+
+      /* Consistent section spacing */
+      .pf-section { padding: 96px 80px; }
+      .pf-section--sm { padding: 60px 80px; }
+
+      /* Consistent section heading */
+      .pf-section-heading {
+        font-family: var(--pf-font-heading);
+        font-size: clamp(28px, 3.2vw, 44px);
+        color: var(--pf-ink);
+        line-height: 1.15;
+        letter-spacing: -0.01em;
+      }
+      .pf-section-sub {
+        font-size: 16px;
+        color: var(--pf-body);
+        line-height: 1.75;
+        margin-top: 12px;
+      }
+
+      /* Announcement bar override to match Pawfolk brand */
+      .shopify-section--announcement-bar {
+        background: var(--pf-forest) !important;
+      }
+
+      /* Make Shopify's built-in buttons match Pawfolk */
+      .button, .btn, button[type="submit"]:not(.pf-nl-btn) {
+        font-family: var(--pf-font-body) !important;
+        letter-spacing: 0.04em !important;
+      }
+
+      /* Cart icon badge */
+      .cart-count-bubble {
+        background: var(--pf-coral) !important;
+      }
+
+      /* Selection color */
+      ::selection {
+        background: rgba(27,58,45,0.15);
+        color: var(--pf-ink);
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .pf-section { padding: 60px 24px; }
+        .pf-section--sm { padding: 40px 24px; }
+      }
+
+      /* Page load fade-in animation */
+      @keyframes pf-fade-in {
+        from { opacity: 0; transform: translateY(16px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .pf-animate {
+        animation: pf-fade-in 0.6s ease forwards;
+        opacity: 0;
+      }
+      .pf-animate-d1 { animation-delay: 0.1s; }
+      .pf-animate-d2 { animation-delay: 0.2s; }
+      .pf-animate-d3 { animation-delay: 0.3s; }
+      .pf-animate-d4 { animation-delay: 0.4s; }
+    </style>
+
+    {% comment %} END PAWFOLK CUSTOM ADDITIONS {% endcomment %}
+
+  </head>
+
+  <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
+    {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
+    <div id="header-group">
+      {% sections 'header-group' %}
+    </div>
+
+    <script>
+      // Inline header height and menu style calculations to prevent layout shift
+      // Note: Updates in calculateHeaderGroupHeight(), updateTransparentHeaderOffset() and setHeaderMenuStyle() utilities.js should be kept in sync with this function
+      (function setHeaderHeighCustomProperties() {
+        /*
+         * Header calculation functions for maintaining CSS variables
+         * Mimic calculateHeaderGroupHeight() in utilities.js
+         */
+        const header = document.querySelector('header-component');
+        const headerGroup = document.querySelector('#header-group');
+        const hasHeaderSection = headerGroup?.querySelector('.header-section');
+
+        if (!header || !headerGroup) return;
+
+        const headerTopRow = header.querySelector('.header__row--top');
+        const headerHeight = header.offsetHeight;
+
+        // Calculate the total height of the header group
+        let headerGroupHeight = 0;
+        const children = headerGroup.children;
+        for (let i = 0; i < children.length; i++) {
+          const element = children[i];
+          if (element === header || !(element instanceof HTMLElement)) continue;
+          headerGroupHeight += element.offsetHeight;
+        }
+
+        // Check for transparent header special case
+        if (header.hasAttribute('transparent') && header.parentElement?.nextElementSibling) {
+          headerGroupHeight += headerHeight;
+        }
+
+        // Set CSS variables
+        document.body.style.setProperty('--header-height', `${headerHeight}px`);
+        document.body.style.setProperty('--header-group-height', `${headerGroupHeight}px`);
+
+        if (headerTopRow) {
+          window.requestAnimationFrame(function () {
+            document.body.style.setProperty('--top-row-height', `${headerTopRow.offsetHeight}px`);
+          });
+        }
+
+        /**
+         * Updates CSS custom properties for transparent header offset calculation
+         * Mimic updateTransparentHeaderOffset() in utilities.js
+         */
+
+        if (!hasHeaderSection || !header?.hasAttribute('transparent')) {
+          document.body.style.setProperty('--transparent-header-offset-boolean', '0');
+          return;
+        }
+
+        const hasImmediateSection = hasHeaderSection.nextElementSibling?.classList.contains('shopify-section');
+
+        const shouldApplyOffset = !hasImmediateSection ? '1' : '0';
+        document.body.style.setProperty('--transparent-header-offset-boolean', shouldApplyOffset);
+      })();
+
+      (function setHeaderMenuStyle() {
+        const headerComponent = document.querySelector('#header-component');
+        if (headerComponent) {
+          const isTouchDevice = 'ontouchstart' in window && navigator.maxTouchPoints > 0;
+          const overflowList = headerComponent?.querySelector('overflow-list');
+          const hasReachedMinimum = overflowList && overflowList.hasAttribute('minimum-reached');
+          headerComponent.dataset.menuStyle = isTouchDevice || hasReachedMinimum ? 'drawer' : 'menu';
+        }
+      })();
+    </script>
+
+    <main
+      id="MainContent"
+      class="content-for-layout"
+      role="main"
+      data-page-transition-enabled="{{ settings.page_transition_enabled }}"
+      data-product-transition="{{ settings.transition_to_main_product }}"
+      data-template="{{ template }}"
+    >
+      {{ content_for_layout }}
+    </main>
+
+    <footer>
+      {% sections 'footer-group' %}
+    </footer>
+
+    {% render 'search-modal' %}
+
+    {% if settings.quick_add or settings.mobile_quick_add %}
+      {% render 'quick-add-modal' %}
+    {% endif %}
+
+    {% comment %} Pawfolk scroll animation trigger {% endcomment %}
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.style.animationPlayState = 'running';
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.pf-animate').forEach(function(el) {
+          el.style.animationPlayState = 'paused';
+          observer.observe(el);
+        });
+      });
+    </script>
+
+  </body>
+</html>

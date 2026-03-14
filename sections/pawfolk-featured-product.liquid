@@ -1,0 +1,253 @@
+{% comment %} PAWFOLK — Featured Product Section {% endcomment %}
+
+<style>
+.pf-featured {
+  padding: 96px 80px;
+  background: {{ section.settings.bg_color }};
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+.pf-feat-inner {
+  background: #FFFFFF;
+  border-radius: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  border: 1px solid rgba(27,58,45,0.12);
+}
+.pf-feat-img-side {
+  background: {{ section.settings.image_bg }};
+  display: flex; align-items: center; justify-content: center;
+  position: relative; min-height: 500px; overflow: hidden;
+}
+.pf-feat-img-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 40% 50%, rgba(232,98,42,0.18) 0%, transparent 55%);
+}
+.pf-feat-badge {
+  position: absolute; top: 28px; left: 28px;
+  background: #E8622A; color: #fff;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+  padding: 7px 16px; border-radius: 100px; text-transform: uppercase;
+}
+.pf-feat-emoji {
+  position: relative; z-index: 2; font-size: 120px;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));
+}
+.pf-feat-img-product {
+  position: relative; z-index: 2;
+  max-width: 80%; max-height: 360px;
+  object-fit: contain;
+}
+.pf-feat-rating-strip {
+  position: absolute; bottom: 28px; left: 28px; right: 28px;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  border-radius: 12px; padding: 14px 18px;
+  display: flex; align-items: center; justify-content: space-between;
+  color: #fff;
+}
+.pf-feat-stars { font-size: 16px; color: #E8622A; letter-spacing: 2px; }
+.pf-feat-rating-sub { font-size: 12px; opacity: 0.65; margin-top: 2px; }
+.pf-feat-sold { text-align: right; }
+.pf-feat-sold-num { font-size: 13px; font-weight: 600; }
+.pf-feat-sold-label { font-size: 11px; opacity: 0.5; }
+
+.pf-feat-content {
+  padding: 56px 56px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.pf-feat-label {
+  display: inline-block;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: #E8622A; margin-bottom: 8px;
+}
+.pf-feat-content h2 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 38px; line-height: 1.15;
+  color: #111A14; margin-bottom: 16px;
+}
+.pf-feat-desc {
+  font-size: 15px; color: #4A5E52;
+  line-height: 1.8; margin-bottom: 24px;
+}
+.pf-feat-bullets {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 10px;
+  margin-bottom: 32px;
+}
+.pf-feat-bullets li {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 14px; color: #4A5E52; line-height: 1.5;
+}
+.pf-feat-check {
+  width: 20px; height: 20px;
+  background: #1B3A2D; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 10px; font-weight: 700;
+  flex-shrink: 0; margin-top: 1px;
+}
+.pf-feat-pricing {
+  display: flex; align-items: center; gap: 14px;
+  padding: 20px 0;
+  border-top: 1px solid rgba(27,58,45,0.12);
+  border-bottom: 1px solid rgba(27,58,45,0.12);
+  margin-bottom: 24px;
+}
+.pf-feat-price {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 38px; font-weight: 700; color: #111A14;
+}
+.pf-feat-orig {
+  font-size: 15px; color: #8A9E92;
+  text-decoration: line-through;
+}
+.pf-feat-save {
+  background: rgba(232,98,42,0.1); color: #E8622A;
+  font-size: 12px; font-weight: 700;
+  padding: 4px 10px; border-radius: 100px;
+}
+.pf-feat-actions { display: flex; gap: 12px; }
+.pf-feat-btn-primary {
+  background: #1B3A2D; color: #fff;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 14px; font-weight: 600; letter-spacing: 0.05em;
+  padding: 14px 32px; border-radius: 8px;
+  transition: background 0.2s, transform 0.15s;
+  flex: 1; text-align: center; text-decoration: none;
+  display: flex; align-items: center; justify-content: center;
+}
+.pf-feat-btn-primary:hover { background: #2D5C45; transform: translateY(-2px); }
+.pf-feat-btn-outline {
+  background: transparent; color: #1B3A2D;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 14px; font-weight: 600; letter-spacing: 0.05em;
+  padding: 14px 24px; border-radius: 8px;
+  border: 1.5px solid #1B3A2D;
+  transition: all 0.2s; text-decoration: none;
+  display: flex; align-items: center; justify-content: center;
+}
+.pf-feat-btn-outline:hover { background: #1B3A2D; color: #fff; }
+
+@media (max-width: 900px) {
+  .pf-featured { padding: 60px 24px; }
+  .pf-feat-inner { grid-template-columns: 1fr; }
+  .pf-feat-img-side { min-height: 320px; }
+  .pf-feat-content { padding: 36px 28px; }
+}
+</style>
+
+<section class="pf-featured">
+  <div class="pf-feat-inner">
+
+    <div class="pf-feat-img-side">
+      <div class="pf-feat-img-glow"></div>
+      {% if section.settings.badge_text != blank %}
+        <div class="pf-feat-badge">{{ section.settings.badge_text }}</div>
+      {% endif %}
+
+      {% if section.settings.product != blank %}
+        {% assign feat_product = all_products[section.settings.product] %}
+        {% if feat_product.featured_image %}
+          <img src="{{ feat_product.featured_image | image_url: width: 600 }}" class="pf-feat-img-product" alt="{{ feat_product.title }}">
+        {% else %}
+          <div class="pf-feat-emoji">{{ section.settings.fallback_emoji }}</div>
+        {% endif %}
+      {% else %}
+        <div class="pf-feat-emoji">{{ section.settings.fallback_emoji }}</div>
+      {% endif %}
+
+      <div class="pf-feat-rating-strip">
+        <div>
+          <div class="pf-feat-stars">★★★★★</div>
+          <div class="pf-feat-rating-sub">{{ section.settings.rating }} from {{ section.settings.review_count }} reviews</div>
+        </div>
+        <div class="pf-feat-sold">
+          <div class="pf-feat-sold-num">{{ section.settings.sold_count }} sold</div>
+          <div class="pf-feat-sold-label">this month</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pf-feat-content">
+      <div class="pf-feat-label">{{ section.settings.label }}</div>
+      <h2>{{ section.settings.heading }}</h2>
+      <p class="pf-feat-desc">{{ section.settings.description }}</p>
+
+      <ul class="pf-feat-bullets">
+        {% for block in section.blocks %}
+          {% if block.type == 'bullet' %}
+            <li {{ block.shopify_attributes }}>
+              <div class="pf-feat-check">✓</div>
+              {{ block.settings.text }}
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+
+      <div class="pf-feat-pricing">
+        <span class="pf-feat-price">{{ section.settings.price }}</span>
+        {% if section.settings.compare_price != blank %}
+          <span class="pf-feat-orig">{{ section.settings.compare_price }}</span>
+          <span class="pf-feat-save">{{ section.settings.save_text }}</span>
+        {% endif %}
+      </div>
+
+      <div class="pf-feat-actions">
+        <a href="{{ section.settings.buy_url }}" class="pf-feat-btn-primary">
+          {{ section.settings.buy_text }}
+        </a>
+        <a href="{{ section.settings.learn_url }}" class="pf-feat-btn-outline">
+          {{ section.settings.learn_text }}
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pawfolk Featured Product",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Section background", "default": "#EDE7DC" },
+    { "type": "color", "id": "image_bg", "label": "Image panel background", "default": "#1B3A2D" },
+    { "type": "product", "id": "product", "label": "Product (auto-fills image)" },
+    { "type": "text", "id": "fallback_emoji", "label": "Emoji (if no product image)", "default": "📡" },
+    { "type": "text", "id": "badge_text", "label": "Badge text", "default": "⭐ Staff Pick of the Month" },
+    { "type": "text", "id": "label", "label": "Section label", "default": "Featured Product" },
+    { "type": "textarea", "id": "heading", "label": "Product heading", "default": "Smart GPS\nPet Tracker Pro" },
+    { "type": "textarea", "id": "description", "label": "Product description", "default": "Never lose sight of your furry friend again. Real-time GPS tracking with 10-day battery life, geofencing alerts, and waterproof design — all in a lightweight 18g clip that your pet won't even notice." },
+    { "type": "text", "id": "rating", "label": "Rating", "default": "4.9" },
+    { "type": "text", "id": "review_count", "label": "Review count", "default": "642" },
+    { "type": "text", "id": "sold_count", "label": "Sold this month", "default": "642" },
+    { "type": "text", "id": "price", "label": "Price", "default": "$49.99" },
+    { "type": "text", "id": "compare_price", "label": "Compare at price (leave blank to hide)", "default": "$69.99" },
+    { "type": "text", "id": "save_text", "label": "Save badge text", "default": "You save $20" },
+    { "type": "text", "id": "buy_text", "label": "Buy button text", "default": "Add to Cart — $49.99" },
+    { "type": "url", "id": "buy_url", "label": "Buy button URL" },
+    { "type": "text", "id": "learn_text", "label": "Secondary button text", "default": "Learn More" },
+    { "type": "url", "id": "learn_url", "label": "Secondary button URL" }
+  ],
+  "blocks": [
+    {
+      "type": "bullet",
+      "name": "Feature bullet",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Feature text", "default": "Live GPS updates every 2 seconds" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Pawfolk Featured Product",
+    "blocks": [
+      { "type": "bullet", "settings": { "text": "Live GPS updates every 2 seconds" }},
+      { "type": "bullet", "settings": { "text": "Safe zone geofencing with instant phone alerts" }},
+      { "type": "bullet", "settings": { "text": "Fully waterproof IP67 — swim, shower, rain safe" }},
+      { "type": "bullet", "settings": { "text": "10-day battery life on a single charge" }},
+      { "type": "bullet", "settings": { "text": "Works for dogs, cats, and small pets" }}
+    ]
+  }]
+}
+{% endschema %}

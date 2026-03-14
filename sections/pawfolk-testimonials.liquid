@@ -1,0 +1,164 @@
+{% comment %} PAWFOLK — Testimonials Section {% endcomment %}
+
+<style>
+.pf-testi {
+  padding: {{ section.settings.padding_top }}px 80px {{ section.settings.padding_bottom }}px;
+  background: #F7F3EE;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.pf-testi-head { margin-bottom: 40px; }
+.pf-testi-label {
+  display: inline-block;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: #E8622A; margin-bottom: 10px;
+}
+.pf-testi-head h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 3.2vw, 44px);
+  color: #111A14; line-height: 1.15;
+}
+.pf-rating-summary {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 28px 36px;
+  margin-bottom: 40px;
+  border: 1px solid rgba(27,58,45,.12);
+}
+.pf-big-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 64px; font-weight: 700;
+  color: #1B3A2D; line-height: 1;
+}
+.pf-big-stars { font-size: 24px; color: #E8622A; letter-spacing: 2px; margin: 4px 0; }
+.pf-big-text { font-size: 13px; color: #8A9E92; }
+.pf-divider { width: 1px; height: 60px; background: rgba(27,58,45,.12); }
+.pf-bar-list { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.pf-bar-row { display: flex; align-items: center; gap: 10px; }
+.pf-bar-label { font-size: 12px; color: #4A5E52; width: 32px; flex-shrink: 0; }
+.pf-bar-track { flex: 1; height: 6px; background: #EDE7DC; border-radius: 3px; overflow: hidden; }
+.pf-bar-fill { height: 100%; background: #E8622A; border-radius: 3px; }
+.pf-bar-pct { font-size: 11px; color: #8A9E92; width: 32px; text-align: right; flex-shrink: 0; }
+.pf-testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.pf-testi-card {
+  background: #fff; border-radius: 14px;
+  padding: 32px; border: 1px solid rgba(27,58,45,.12);
+  transition: transform .25s, box-shadow .25s;
+}
+.pf-testi-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(27,58,45,.08); }
+.pf-testi-top {
+  display: flex; align-items: center;
+  justify-content: space-between; margin-bottom: 18px;
+}
+.pf-testi-stars { font-size: 15px; color: #E8622A; letter-spacing: 2px; }
+.pf-testi-verified {
+  font-size: 10px; font-weight: 700; letter-spacing: .08em;
+  color: #1B3A2D; background: rgba(27,58,45,.08);
+  padding: 3px 8px; border-radius: 100px; text-transform: uppercase;
+}
+.pf-testi-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; font-style: italic;
+  color: #4A5E52; line-height: 1.75; margin-bottom: 24px;
+}
+.pf-testi-author { display: flex; align-items: center; gap: 12px; }
+.pf-testi-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: #EDE7DC;
+  display: flex; align-items: center;
+  justify-content: center; font-size: 22px;
+}
+.pf-testi-name { font-size: 14px; font-weight: 600; color: #111A14; }
+.pf-testi-meta { font-size: 12px; color: #8A9E92; margin-top: 2px; }
+.pf-testi-product {
+  font-size: 11px; color: #E8622A;
+  font-weight: 600; margin-top: 4px;
+}
+@media (max-width: 768px) {
+  .pf-testi { padding: 60px 24px; }
+  .pf-testi-grid { grid-template-columns: 1fr; }
+  .pf-rating-summary { flex-direction: column; align-items: flex-start; }
+  .pf-divider { display: none; }
+}
+</style>
+
+<section class="pf-testi">
+  <div class="pf-testi-head">
+    <div class="pf-testi-label">{{ section.settings.label }}</div>
+    <h2>{{ section.settings.heading }}</h2>
+  </div>
+
+  <div class="pf-rating-summary">
+    <div>
+      <div class="pf-big-num">{{ section.settings.overall_rating }}</div>
+      <div class="pf-big-stars">★★★★★</div>
+      <div class="pf-big-text">{{ section.settings.total_reviews }}</div>
+    </div>
+    <div class="pf-divider"></div>
+    <div class="pf-bar-list">
+      <div class="pf-bar-row"><div class="pf-bar-label">5★</div><div class="pf-bar-track"><div class="pf-bar-fill" style="width:88%"></div></div><div class="pf-bar-pct">88%</div></div>
+      <div class="pf-bar-row"><div class="pf-bar-label">4★</div><div class="pf-bar-track"><div class="pf-bar-fill" style="width:8%"></div></div><div class="pf-bar-pct">8%</div></div>
+      <div class="pf-bar-row"><div class="pf-bar-label">3★</div><div class="pf-bar-track"><div class="pf-bar-fill" style="width:3%"></div></div><div class="pf-bar-pct">3%</div></div>
+      <div class="pf-bar-row"><div class="pf-bar-label">2★</div><div class="pf-bar-track"><div class="pf-bar-fill" style="width:1%"></div></div><div class="pf-bar-pct">1%</div></div>
+      <div class="pf-bar-row"><div class="pf-bar-label">1★</div><div class="pf-bar-track"><div class="pf-bar-fill" style="width:0%"></div></div><div class="pf-bar-pct">0%</div></div>
+    </div>
+  </div>
+
+  <div class="pf-testi-grid">
+    {% for block in section.blocks %}
+      <div class="pf-testi-card" {{ block.shopify_attributes }}>
+        <div class="pf-testi-top">
+          <div class="pf-testi-stars">★★★★★</div>
+          <div class="pf-testi-verified">✓ Verified</div>
+        </div>
+        <p class="pf-testi-text">"{{ block.settings.review }}"</p>
+        <div class="pf-testi-author">
+          <div class="pf-testi-avatar">{{ block.settings.avatar }}</div>
+          <div>
+            <div class="pf-testi-name">{{ block.settings.name }}</div>
+            <div class="pf-testi-meta">{{ block.settings.meta }}</div>
+            <div class="pf-testi-product">📦 Bought: {{ block.settings.product }}</div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pawfolk Testimonials",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Section label", "default": "Reviews" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Loved by 12,000+ Pet Families" },
+    { "type": "text", "id": "overall_rating", "label": "Overall rating", "default": "4.9" },
+    { "type": "text", "id": "total_reviews", "label": "Total reviews text", "default": "3,240 verified reviews" },
+    { "type": "range", "id": "padding_top", "min": 40, "max": 120, "step": 8, "unit": "px", "label": "Top padding", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "min": 40, "max": 120, "step": 8, "unit": "px", "label": "Bottom padding", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "textarea", "id": "review", "label": "Review text", "default": "My pet absolutely loves the product. Worth every penny!" },
+        { "type": "text", "id": "avatar", "label": "Avatar emoji", "default": "👩" },
+        { "type": "text", "id": "name", "label": "Customer name", "default": "Sarah Mitchell" },
+        { "type": "text", "id": "meta", "label": "Customer meta", "default": "Dog Mom · Texas, USA" },
+        { "type": "text", "id": "product", "label": "Product bought", "default": "Orthopedic Memory Foam Bed" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Pawfolk Testimonials",
+    "blocks": [
+      { "type": "review", "settings": { "review": "My golden retriever Max absolutely loves his new orthopedic bed. He used to wake up stiff every morning — now he sleeps through the night. Worth every penny!", "avatar": "👩", "name": "Sarah Mitchell", "meta": "Dog Mom · Texas, USA", "product": "Orthopedic Memory Foam Bed" }},
+      { "type": "review", "settings": { "review": "The GPS tracker gave me such peace of mind. My cat Mochi is an escape artist — within 3 days I stopped worrying completely. The geofencing alert actually works!", "avatar": "🧑", "name": "James Okafor", "meta": "Cat Dad · London, UK", "product": "Smart GPS Tracker Pro" }},
+      { "type": "review", "settings": { "review": "Fast shipping, beautiful packaging, and quality that matches the photos. The leather collar is stunning — I've gotten so many compliments at the dog park!", "avatar": "👩", "name": "Priya Sharma", "meta": "Dog Mom · Toronto, CA", "product": "Luxury Leather Collar" }}
+    ]
+  }]
+}
+{% endschema %}
