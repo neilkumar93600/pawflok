@@ -166,6 +166,15 @@
         background: var(--pf-forest) !important;
       }
 
+      /* Footer: no gap, no stray borders */
+      footer {
+        margin-top: 0;
+      }
+      footer .shopify-section {
+        padding-top: 0;
+        border-top: none;
+      }
+
       /* Make Shopify's built-in buttons match pawflok */
       .button, .btn, button[type="submit"]:not(.pf-nl-btn) {
         font-family: var(--pf-font-body) !important;
