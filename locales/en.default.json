@@ -8,6 +8,19 @@
  * ------------------------------------------------------------
  */
 {
+  "names": {
+    "sections": {
+      "hero": "Hero Banner",
+      "featured_collection": "Featured Collection",
+      "footer": "Footer",
+      "header": "Header"
+    },
+    "blocks": {
+      "heading": "Heading",
+      "text": "Text",
+      "button": "Button"
+    }
+  },
   "accessibility": {
     "account": "Account",
     "cart": "Cart",

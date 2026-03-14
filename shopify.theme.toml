@@ -1,0 +1,12 @@
+# Shopify Theme Configuration
+# See https://shopify.dev/docs/themes/tools/cli/configuration for more details
+
+name = "Pawfolk"
+author = "Neil Kumar"
+version = "1.0.0"
+
+[environments]
+[environments.default]
+# Add your store and theme ID here if needed, or use the Shopify CLI to manage them
+# store = "your-store.myshopify.com"
+# theme = "1234567890"
