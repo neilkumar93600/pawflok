@@ -132,9 +132,9 @@
         "prod_1": {
           "type": "product_card",
           "settings": {
-            "title": "Luxury Leather Dog Collar",
+            "product": "luxury-leather-dog-collar",
+            "title": "Premium Leather Dog Collar",
             "category": "Dogs · Collars",
-            "emoji": "🦮",
             "price": "₹1,499",
             "compare_price": "₹1,999",
             "stars": "★★★★★",
@@ -146,9 +146,9 @@
         "prod_2": {
           "type": "product_card",
           "settings": {
+            "product": "orthopedic-memory-foam-pet-bed",
             "title": "Orthopedic Memory Foam Bed",
             "category": "Dogs · Beds",
-            "emoji": "🛏️",
             "price": "₹3,999",
             "compare_price": "₹4,999",
             "stars": "★★★★★",
@@ -160,9 +160,9 @@
         "prod_3": {
           "type": "product_card",
           "settings": {
+            "product": "interactive-feather-wand-cat-toy",
             "title": "Interactive Feather Wand Set",
             "category": "Cats · Toys",
-            "emoji": "🐱",
             "price": "₹599",
             "compare_price": "₹799",
             "stars": "★★★★☆",
@@ -174,11 +174,10 @@
         "prod_4": {
           "type": "product_card",
           "settings": {
+            "product": "stainless-steel-bowl-set-2pack",
             "title": "Stainless Steel Bowl Set",
             "category": "All Pets · Feeding",
-            "emoji": "🍽️",
             "price": "₹899",
-            "compare_price": "",
             "stars": "★★★★★",
             "review_count": "427",
             "badge_text": "",
