@@ -46,11 +46,13 @@
         "legal_column"
       ],
       "settings": {
-        "bg_color": "#111A14",
+        "bg_color": "#1B3A2D",
         "accent_color": "#E8622A",
         "logo_text": "PAW|FOLK",
         "brand_desc": "Premium pet accessories crafted for comfort, style, and the unconditional love of animals. Trusted by 12,000+ pet families across India.",
         "brand_name": "Pawflok",
+        "social_instagram": "https://www.instagram.com/",
+        "social_facebook": "https://www.facebook.com/",
         "show_newsletter": true,
         "nl_label": "Join the Pawflok Family",
         "nl_placeholder": "Enter your email",

@@ -3,31 +3,70 @@
 <style>
   .pf-footer {
     background: {{ section.settings.bg_color }};
-    padding: 72px 80px 32px;
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    margin-top: 0;
+  }
+
+  .pf-footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 64px 24px 24px;
+  }
+
+  @media (min-width: 750px) {
+    .pf-footer-inner {
+      padding: 80px 40px 32px;
+    }
+  }
+
+  @media (min-width: 990px) {
+    .pf-footer-inner {
+      padding: 96px 48px 40px;
+    }
   }
 
   .pf-footer-top {
     display: grid;
-    grid-template-columns: 2.2fr 1fr 1fr 1fr;
-    gap: 52px;
-    padding-bottom: 60px;
-    border-bottom: 1px solid rgba(255,255,255,0.07);
-    margin-bottom: 28px;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 32px;
+  }
+
+  @media (min-width: 750px) {
+    .pf-footer-top {
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 40px 32px;
+      padding-bottom: 56px;
+      margin-bottom: 36px;
+    }
   }
 
   /* Brand column */
-  .pf-footer-brand {}
+  .pf-footer-brand {
+    grid-column: 1;
+  }
 
   .pf-footer-logo {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 700;
     color: #FFFFFF;
     letter-spacing: -0.02em;
-    margin-bottom: 14px;
-    display: block;
+    margin-bottom: 12px;
+    display: inline-block;
     text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .pf-footer-logo:hover {
+    opacity: 0.9;
+  }
+
+  .pf-footer-logo:focus-visible {
+    outline: 2px solid {{ section.settings.accent_color }};
+    outline-offset: 4px;
   }
 
   .pf-footer-logo span {
@@ -36,167 +75,208 @@
 
   .pf-footer-desc {
     font-size: 14px;
-    line-height: 1.75;
-    color: rgba(255,255,255,0.4);
+    line-height: 1.7;
+    color: rgba(255,255,255,0.5);
     margin-bottom: 24px;
-    max-width: 280px;
+    max-width: 320px;
   }
 
   /* Social icons */
   .pf-footer-socials {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     margin-bottom: 28px;
+    flex-wrap: wrap;
   }
 
   .pf-social-btn {
-    width: 38px;
-    height: 38px;
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    transition: border-color 0.2s, background 0.2s;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
     font-size: 16px;
   }
 
   .pf-social-btn:hover {
     border-color: {{ section.settings.accent_color }};
-    background: rgba(232,98,42,0.1);
+    background: rgba(232,98,42,0.12);
+    transform: translateY(-2px);
   }
 
-  /* Newsletter mini */
+  .pf-social-btn:focus-visible {
+    outline: 2px solid {{ section.settings.accent_color }};
+    outline-offset: 2px;
+  }
+
+  /* Newsletter */
   .pf-footer-nl-label {
     font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
-    margin-bottom: 10px;
+    color: {{ section.settings.accent_color }};
+    margin-bottom: 12px;
+    opacity: 0.95;
   }
 
   .pf-footer-nl-form {
     display: flex;
     gap: 0;
+    max-width: 340px;
   }
 
   .pf-footer-nl-input {
     flex: 1;
-    padding: 11px 14px;
-    background: rgba(255,255,255,0.07);
+    min-width: 0;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.12);
     border-right: none;
-    border-radius: 6px 0 0 6px;
+    border-radius: 8px 0 0 8px;
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-    font-size: 13px;
+    font-size: 14px;
     color: #fff;
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, background 0.2s;
   }
 
   .pf-footer-nl-input::placeholder {
-    color: rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.35);
   }
 
   .pf-footer-nl-input:focus {
-    border-color: rgba(232,98,42,0.4);
+    border-color: {{ section.settings.accent_color }};
+    background: rgba(255,255,255,0.08);
   }
 
   .pf-footer-nl-btn {
     background: {{ section.settings.accent_color }};
     color: #fff;
-    border: none;
-    padding: 11px 16px;
-    border-radius: 0 6px 6px 0;
+    border: 1px solid {{ section.settings.accent_color }};
+    padding: 12px 20px;
+    border-radius: 0 8px 8px 0;
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.15s;
     white-space: nowrap;
   }
 
   .pf-footer-nl-btn:hover {
     background: #F07A45;
+    border-color: #F07A45;
+    transform: translateX(2px);
+  }
+
+  .pf-footer-nl-btn:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
   }
 
   /* Link columns */
-  .pf-footer-col {}
-
   .pf-footer-col-heading {
     font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: #FFFFFF;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
+    opacity: 0.95;
   }
 
   .pf-footer-links {
     list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
+  }
+
+  .pf-footer-links li {
+    margin: 0;
   }
 
   .pf-footer-links a {
     font-size: 14px;
-    color: rgba(255,255,255,0.38);
+    color: rgba(255,255,255,0.55);
     text-decoration: none;
-    transition: color 0.2s;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    transition: color 0.2s, padding-left 0.2s;
+    display: inline-block;
   }
 
   .pf-footer-links a:hover {
     color: {{ section.settings.accent_color }};
+    padding-left: 4px;
   }
 
-  /* Trust badges row */
+  .pf-footer-links a:focus-visible {
+    outline: 2px solid {{ section.settings.accent_color }};
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Trust row */
   .pf-footer-trust {
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding: 20px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.07);
-    margin-bottom: 24px;
+    justify-content: center;
+    gap: 24px;
+    padding: 24px 0;
+    margin-bottom: 32px;
     flex-wrap: wrap;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
   }
 
   .pf-footer-trust-item {
     display: flex;
     align-items: center;
-    gap: 7px;
-    font-size: 12px;
-    color: rgba(255,255,255,0.35);
+    gap: 8px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 500;
   }
 
   .pf-footer-trust-dot {
     width: 4px;
     height: 4px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.2);
+    flex-shrink: 0;
   }
 
   /* Bottom bar */
   .pf-footer-bottom {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 16px;
+    gap: 20px;
+    text-align: center;
+  }
+
+  @media (min-width: 750px) {
+    .pf-footer-bottom {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+    }
   }
 
   .pf-footer-copy {
     font-size: 13px;
-    color: rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.4);
+    line-height: 1.6;
   }
 
   .pf-footer-copy a {
-    color: rgba(255,255,255,0.35);
+    color: rgba(255,255,255,0.55);
     text-decoration: none;
     transition: color 0.2s;
   }
@@ -207,65 +287,45 @@
 
   .pf-footer-payments {
     display: flex;
-    gap: 6px;
+    gap: 8px;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
+  }
+
+  @media (min-width: 750px) {
+    .pf-footer-payments {
+      justify-content: flex-end;
+    }
   }
 
   .pf-pay-pill {
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.10);
-    border-radius: 5px;
-    padding: 5px 10px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    padding: 6px 12px;
     font-size: 10px;
     font-weight: 700;
-    letter-spacing: 0.06em;
-    color: rgba(255,255,255,0.35);
-  }
-
-  .pf-footer-legal-links {
-    display: flex;
-    gap: 20px;
-  }
-
-  .pf-footer-legal-links a {
-    font-size: 12px;
-    color: rgba(255,255,255,0.2);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .pf-footer-legal-links a:hover {
-    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.45);
   }
 
   /* Responsive */
-  @media (max-width: 1024px) {
-    .pf-footer-top {
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .pf-footer {
-      padding: 52px 24px 28px;
-    }
-    .pf-footer-top {
-      grid-template-columns: 1fr;
-      gap: 36px;
-    }
-    .pf-footer-bottom {
-      flex-direction: column;
-      align-items: flex-start;
-    }
+  @media (max-width: 749px) {
     .pf-footer-trust {
-      gap: 12px;
+      justify-content: flex-start;
+      gap: 16px;
+      padding: 20px 0;
+    }
+
+    .pf-footer-trust-item {
+      font-size: 12px;
     }
   }
 </style>
 
-<footer class="pf-footer">
+<footer class="pf-footer" role="contentinfo">
+  <div class="pf-footer-inner">
 
   <div class="pf-footer-top">
 
@@ -276,6 +336,11 @@
       </a>
       <p class="pf-footer-desc">{{ section.settings.brand_desc }}</p>
 
+      {% assign has_social = false %}
+      {% if section.settings.social_instagram != blank or section.settings.social_facebook != blank or section.settings.social_tiktok != blank or section.settings.social_youtube != blank or section.settings.social_pinterest != blank %}
+        {% assign has_social = true %}
+      {% endif %}
+      {% if has_social %}
       <div class="pf-footer-socials">
         {% if section.settings.social_instagram != blank %}
           <a href="{{ section.settings.social_instagram }}" class="pf-social-btn" target="_blank" rel="noopener" aria-label="Instagram">
@@ -303,6 +368,7 @@
           </a>
         {% endif %}
       </div>
+      {% endif %}
 
       {%- comment -%} Mini newsletter {%- endcomment -%}
       {% if section.settings.show_newsletter %}
@@ -391,6 +457,7 @@
     </div>
   </div>
 
+  </div>
 </footer>
 
 {% schema %}
