@@ -122,13 +122,13 @@
             {% if block.settings.avatar_image != blank %}
               <img src="{{ block.settings.avatar_image | image_url: width: 88 }}" alt="" class="pf-testi-avatar-img">
             {% else %}
-              {{ block.settings.avatar }}
+              <img src="https://picsum.photos/id/{% cycle 64, 177, 1074 %}/88/88" alt="" class="pf-testi-avatar-img">
             {% endif %}
           </div>
           <div>
             <div class="pf-testi-name">{{ block.settings.name }}</div>
             <div class="pf-testi-meta">{{ block.settings.meta }}</div>
-            <div class="pf-testi-product">📦 Bought: {{ block.settings.product }}</div>
+            <div class="pf-testi-product">Bought: {{ block.settings.product }}</div>
           </div>
         </div>
       </div>

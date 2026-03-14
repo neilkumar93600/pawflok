@@ -213,7 +213,7 @@
               {% elsif block.settings.image != blank %}
                 <img src="{{ block.settings.image | image_url: width: 500 }}" alt="{{ block.settings.title }}">
               {% else %}
-                <span class="pf-prod-img-emoji">{{ block.settings.emoji }}</span>
+                <img src="https://picsum.photos/seed/pawfolk-prod-{{ forloop.index }}/500/300" alt="{{ block.settings.title }}">
               {% endif %}
             </a>
             {% if block.settings.badge_text != blank %}
@@ -251,7 +251,7 @@
                   <span class="pf-prod-orig">{{ block.settings.compare_price }}</span>
                 {% endif %}
               </div>
-              <a href="{{ card_url }}" class="pf-prod-cart-btn" aria-label="View product">🛒</a>
+              <a href="{{ card_url }}" class="pf-prod-cart-btn" aria-label="View product">+</a>
             </div>
           </div>
         </div>

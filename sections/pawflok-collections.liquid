@@ -91,10 +91,7 @@
       {% if forloop.first %}{% assign is_tall = true %}{% endif %}
 
       <div class="pf-coll-item{% if is_tall %} pf-tall{% endif %}" {{ block.shopify_attributes }}>
-        <div class="pf-coll-bg" style="background-color: {{ block.settings.bg_color }};{% if block.settings.collection != blank and collections[block.settings.collection].image %} background-image: url('{{ collections[block.settings.collection].image | image_url: width: 800 }}');{% elsif block.settings.image != blank %} background-image: url('{{ block.settings.image | image_url: width: 800 }}');{% endif %}">
-          {% unless block.settings.collection != blank and collections[block.settings.collection].image or block.settings.image != blank %}
-            <span style="font-size:{% if is_tall %}120{% else %}80{% endif %}px">{{ block.settings.emoji }}</span>
-          {% endunless %}
+        <div class="pf-coll-bg" style="background-color: {{ block.settings.bg_color }};{% if block.settings.collection != blank and collections[block.settings.collection].image %} background-image: url('{{ collections[block.settings.collection].image | image_url: width: 800 }}');{% elsif block.settings.image != blank %} background-image: url('{{ block.settings.image | image_url: width: 800 }}');{% else %} background-image: url('https://picsum.photos/seed/pawfolk-coll-{{ forloop.index }}/800/520');{% endif %}">
         </div>
         <div class="pf-coll-overlay">
           <div class="pf-coll-tag">{{ block.settings.tag }}</div>

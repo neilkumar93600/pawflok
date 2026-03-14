@@ -200,16 +200,16 @@
     <div class="pf-hero-proof">
       <div class="pf-proof-avatars">
         <div class="pf-proof-avatar">
-          {% if section.settings.proof_avatar_1 != blank %}<img src="{{ section.settings.proof_avatar_1 | image_url: width: 72 }}" alt="" class="pf-proof-avatar-img">{% else %}👩{% endif %}
+          {% if section.settings.proof_avatar_1 != blank %}<img src="{{ section.settings.proof_avatar_1 | image_url: width: 72 }}" alt="" class="pf-proof-avatar-img">{% else %}<img src="https://picsum.photos/id/64/72/72" alt="" class="pf-proof-avatar-img">{% endif %}
         </div>
         <div class="pf-proof-avatar">
-          {% if section.settings.proof_avatar_2 != blank %}<img src="{{ section.settings.proof_avatar_2 | image_url: width: 72 }}" alt="" class="pf-proof-avatar-img">{% else %}🧑{% endif %}
+          {% if section.settings.proof_avatar_2 != blank %}<img src="{{ section.settings.proof_avatar_2 | image_url: width: 72 }}" alt="" class="pf-proof-avatar-img">{% else %}<img src="https://picsum.photos/id/177/72/72" alt="" class="pf-proof-avatar-img">{% endif %}
         </div>
         <div class="pf-proof-avatar">
-          {% if section.settings.proof_avatar_3 != blank %}<img src="{{ section.settings.proof_avatar_3 | image_url: width: 72 }}" alt="" class="pf-proof-avatar-img">{% else %}👩{% endif %}
+          {% if section.settings.proof_avatar_3 != blank %}<img src="{{ section.settings.proof_avatar_3 | image_url: width: 72 }}" alt="" class="pf-proof-avatar-img">{% else %}<img src="https://picsum.photos/id/1074/72/72" alt="" class="pf-proof-avatar-img">{% endif %}
         </div>
         <div class="pf-proof-avatar">
-          {% if section.settings.proof_avatar_4 != blank %}<img src="{{ section.settings.proof_avatar_4 | image_url: width: 72 }}" alt="" class="pf-proof-avatar-img">{% else %}👨{% endif %}
+          {% if section.settings.proof_avatar_4 != blank %}<img src="{{ section.settings.proof_avatar_4 | image_url: width: 72 }}" alt="" class="pf-proof-avatar-img">{% else %}<img src="https://picsum.photos/id/1084/72/72" alt="" class="pf-proof-avatar-img">{% endif %}
         </div>
       </div>
       <div>
@@ -224,17 +224,17 @@
       {% if section.settings.hero_image != blank %}
         <img src="{{ section.settings.hero_image | image_url: width: 400 }}" alt="" class="pf-hero-img">
       {% else %}
-        <div class="pf-hero-emoji">{{ section.settings.hero_emoji }}</div>
+        <img src="https://picsum.photos/id/237/400/500" alt="" class="pf-hero-img">
       {% endif %}
       <div class="pf-float-card">
-        <div class="pf-float-icon">{% if section.settings.float1_image != blank %}<img src="{{ section.settings.float1_image | image_url: width: 48 }}" alt="" class="pf-float-icon-img">{% else %}📦{% endif %}</div>
+        <div class="pf-float-icon">{% if section.settings.float1_image != blank %}<img src="{{ section.settings.float1_image | image_url: width: 48 }}" alt="" class="pf-float-icon-img">{% else %}<img src="https://picsum.photos/id/119/48/48" alt="" class="pf-float-icon-img">{% endif %}</div>
         <div>
           <div class="pf-float-title">{{ section.settings.float1_title }}</div>
           <div class="pf-float-sub">{{ section.settings.float1_sub }}</div>
         </div>
       </div>
       <div class="pf-float-card">
-        <div class="pf-float-icon">{% if section.settings.float2_image != blank %}<img src="{{ section.settings.float2_image | image_url: width: 48 }}" alt="" class="pf-float-icon-img">{% else %}🏆{% endif %}</div>
+        <div class="pf-float-icon">{% if section.settings.float2_image != blank %}<img src="{{ section.settings.float2_image | image_url: width: 48 }}" alt="" class="pf-float-icon-img">{% else %}<img src="https://picsum.photos/id/433/48/48" alt="" class="pf-float-icon-img">{% endif %}</div>
         <div>
           <div class="pf-float-title">{{ section.settings.float2_title }}</div>
           <div class="pf-float-sub">{{ section.settings.float2_sub }}</div>
