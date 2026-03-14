@@ -122,7 +122,7 @@
             {% if block.settings.avatar_image != blank %}
               <img src="{{ block.settings.avatar_image | image_url: width: 88 }}" alt="" class="pf-testi-avatar-img">
             {% else %}
-              <img src="https://picsum.photos/id/{% cycle 64, 177, 1074 %}/88/88" alt="" class="pf-testi-avatar-img">
+              <img src="https://images.unsplash.com/photo-{% cycle '1494790108377-be9c29b29330', '1507003211169-0a1dd7228f2d', '1438761681033-6461ffad8d80' %}?w=88&h=88&fit=crop&crop=faces" alt="" class="pf-testi-avatar-img">
             {% endif %}
           </div>
           <div>

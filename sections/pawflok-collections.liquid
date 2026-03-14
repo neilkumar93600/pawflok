@@ -91,7 +91,7 @@
       {% if forloop.first %}{% assign is_tall = true %}{% endif %}
 
       <div class="pf-coll-item{% if is_tall %} pf-tall{% endif %}" {{ block.shopify_attributes }}>
-        <div class="pf-coll-bg" style="background-color: {{ block.settings.bg_color }};{% if block.settings.collection != blank and collections[block.settings.collection].image %} background-image: url('{{ collections[block.settings.collection].image | image_url: width: 800 }}');{% elsif block.settings.image != blank %} background-image: url('{{ block.settings.image | image_url: width: 800 }}');{% else %} background-image: url('https://picsum.photos/seed/pawfolk-coll-{{ forloop.index }}/800/520');{% endif %}">
+        <div class="pf-coll-bg" style="background-color: {{ block.settings.bg_color }};{% if block.settings.collection != blank and collections[block.settings.collection].image %} background-image: url('{{ collections[block.settings.collection].image | image_url: width: 800 }}');{% elsif block.settings.image != blank %} background-image: url('{{ block.settings.image | image_url: width: 800 }}');{% else %} background-image: url('https://images.unsplash.com/photo-{% case forloop.index %}{% when 1 %}1530281700549-e82e7bf110d6{% when 2 %}1514888286974-6c03e2ca1dba{% when 3 %}1720411396753-405e506a909b{% else %}1566576912321-d58ddd7a6088{% endcase %}?w=800&h=520&fit=crop');{% endif %}">
         </div>
         <div class="pf-coll-overlay">
           <div class="pf-coll-tag">{{ block.settings.tag }}</div>
