@@ -70,6 +70,7 @@
 }
 .pf-ben-card:hover .pf-ben-num { color: rgba(232,98,42,.2); }
 .pf-ben-icon { font-size: 34px; display: block; margin-bottom: 16px; }
+.pf-ben-icon-svg { display: block; margin-bottom: 16px; color: rgba(232,98,42,.6); }
 .pf-ben-icon-img { width: 40px; height: 40px; object-fit: contain; display: block; margin-bottom: 16px; }
 .pf-ben-title {
   font-family: 'Cormorant Garamond', serif;
@@ -101,7 +102,7 @@
         {% if block.settings.icon_image != blank %}
           <img src="{{ block.settings.icon_image | image_url: width: 64 }}" alt="" class="pf-ben-icon-img">
         {% else %}
-          <span class="pf-ben-icon">{{ block.settings.icon }}</span>
+          <span class="pf-ben-icon-svg"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="19" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.3"/><path d="M12 20l5 5 11-12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         {% endif %}
         <div class="pf-ben-title">{{ block.settings.title }}</div>
         <p class="pf-ben-text">{{ block.settings.text }}</p>

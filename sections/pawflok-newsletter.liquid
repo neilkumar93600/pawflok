@@ -40,6 +40,7 @@
   flex-shrink: 0; color: #E8622A;
 }
 .pf-nl-perk-img { width: 12px; height: 12px; object-fit: contain; }
+.pf-nl-check { color: #E8622A; flex-shrink: 0; }
 .pf-nl-right {
   background: rgba(255,255,255,.06);
   border: 1px solid rgba(255,255,255,.1);
@@ -78,7 +79,9 @@
 .pf-nl-disclaimer {
   font-size: 11px; color: rgba(255,255,255,.25);
   text-align: center; margin-top: 8px;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
 }
+.pf-nl-disclaimer-icon { color: rgba(255,255,255,.4); flex-shrink: 0; }
 @media (max-width: 768px) {
   .pf-newsletter { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; }
 }
@@ -96,7 +99,7 @@
             {% if block.settings.icon_image != blank %}
               <img src="{{ block.settings.icon_image | image_url: width: 24 }}" alt="" class="pf-nl-perk-img">
             {% else %}
-              ✓
+              <svg class="pf-nl-check" width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 4l2.5 2.5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             {% endif %}
           </div>
           {{ block.settings.perk_text }}
@@ -115,7 +118,10 @@
         <button class="pf-nl-btn" type="submit">{{ section.settings.btn_text }}</button>
       </div>
     {% endform %}
-    <div class="pf-nl-disclaimer">{{ section.settings.disclaimer }}</div>
+    <div class="pf-nl-disclaimer">
+      <span class="pf-nl-disclaimer-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v2.5M3 3.5v2a3 3 0 006 0v-2M2 5h8a1 1 0 011 1v4a1 1 0 01-1 1H2a1 1 0 01-1-1V6a1 1 0 011-1z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></span>
+      {{ section.settings.disclaimer | replace: '🔒 ', '' | replace: '🔒', '' }}
+    </div>
   </div>
 </section>
 
@@ -129,7 +135,7 @@
     { "type": "text", "id": "offer", "label": "Offer text", "default": "15% OFF" },
     { "type": "text", "id": "offer_sub", "label": "Offer subtitle", "default": "your first order when you join" },
     { "type": "text", "id": "btn_text", "label": "Button text", "default": "Claim My 15% Discount →" },
-    { "type": "text", "id": "disclaimer", "label": "Disclaimer", "default": "🔒 No spam, ever. Unsubscribe in one click." },
+    { "type": "text", "id": "disclaimer", "label": "Disclaimer", "default": "No spam, ever. Unsubscribe in one click." },
     { "type": "range", "id": "padding_top", "min": 40, "max": 120, "step": 8, "unit": "px", "label": "Top padding", "default": 96 },
     { "type": "range", "id": "padding_bottom", "min": 40, "max": 120, "step": 8, "unit": "px", "label": "Bottom padding", "default": 96 }
   ],
