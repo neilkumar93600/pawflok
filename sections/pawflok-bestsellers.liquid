@@ -98,15 +98,25 @@
 }
 .pf-prod-card:hover .pf-prod-wish { opacity: 1; }
 
+.pf-prod-img-link {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; color: inherit;
+}
+.pf-prod-img-link img { position: relative; z-index: 1; }
+.pf-quick-add-form { position: absolute; bottom: 0; left: 0; right: 0; z-index: 3; margin: 0; }
 .pf-prod-quick-add {
-  position: absolute; bottom: 0; left: 0; right: 0;
+  position: relative; bottom: auto; left: auto; right: auto;
+  width: 100%; margin: 0;
   background: #1B3A2D; color: #fff;
   font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
   text-transform: uppercase; padding: 12px; text-align: center;
   transform: translateY(100%); transition: transform 0.25s;
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-  z-index: 2; width: 100%; display: block;
+  border: none; cursor: pointer;
+  display: block; text-decoration: none;
 }
+.pf-prod-quick-add:disabled { opacity: 0.6; cursor: not-allowed; }
 .pf-prod-card:hover .pf-prod-quick-add { transform: translateY(0); }
 
 .pf-prod-info { padding: 16px 18px 20px; }
@@ -189,25 +199,45 @@
     {% for block in section.blocks %}
       {% if block.type == 'product_card' %}
         {% assign card_product = all_products[block.settings.product] %}
-        <a href="{% if card_product != blank %}{{ card_product.url }}{% else %}{{ section.settings.view_all_url }}{% endif %}" class="pf-prod-card" {{ block.shopify_attributes }}>
+        {% if card_product != blank %}
+          {% assign card_url = card_product.url %}
+        {% else %}
+          {% assign card_url = section.settings.view_all_url | default: '/collections/all' %}
+        {% endif %}
+        <div class="pf-prod-card" {{ block.shopify_attributes }}>
           <div class="pf-prod-img">
             <div class="pf-prod-img-glow"></div>
-            {% if card_product != blank and card_product.featured_image %}
-              <img src="{{ card_product.featured_image | image_url: width: 500 }}" alt="{{ card_product.title }}">
-            {% else %}
-              <span class="pf-prod-img-emoji">{{ block.settings.emoji }}</span>
-            {% endif %}
+            <a href="{{ card_url }}" class="pf-prod-img-link">
+              {% if card_product != blank and card_product.featured_image %}
+                <img src="{{ card_product.featured_image | image_url: width: 500 }}" alt="{{ card_product.title }}">
+              {% elsif block.settings.image != blank %}
+                <img src="{{ block.settings.image | image_url: width: 500 }}" alt="{{ block.settings.title }}">
+              {% else %}
+                <span class="pf-prod-img-emoji">{{ block.settings.emoji }}</span>
+              {% endif %}
+            </a>
             {% if block.settings.badge_text != blank %}
               <div class="pf-prod-badge pf-badge-{{ block.settings.badge_type }}">{{ block.settings.badge_text }}</div>
             {% endif %}
             <div class="pf-prod-wish">♡</div>
-            <span class="pf-prod-quick-add">+ Quick Add to Cart</span>
+            {% if card_product != blank %}
+              {% assign variant = card_product.selected_or_first_available_variant %}
+              <product-form-component data-section-id="{{ section.id }}" data-product-id="{{ card_product.id }}">
+                {% form 'product', card_product, class: 'pf-quick-add-form', data-type: 'add-to-cart-form' %}
+                  <input type="hidden" name="id" value="{{ variant.id }}">
+                  <input type="hidden" name="quantity" value="1">
+                  <button type="submit" class="pf-prod-quick-add" {% unless variant.available %}disabled{% endunless %}>+ Quick Add to Cart</button>
+                {% endform %}
+              </product-form-component>
+            {% else %}
+              <a href="{{ card_url }}" class="pf-prod-quick-add">+ Quick Add to Cart</a>
+            {% endif %}
           </div>
           <div class="pf-prod-info">
             <div class="pf-prod-cat">{{ block.settings.category }}</div>
-            <div class="pf-prod-name">
+            <a href="{{ card_url }}" class="pf-prod-name">
               {% if card_product != blank %}{{ card_product.title }}{% else %}{{ block.settings.title }}{% endif %}
-            </div>
+            </a>
             <div class="pf-prod-stars">
               <span class="pf-stars">{{ block.settings.stars }}</span>
               <span class="pf-rev-cnt">({{ block.settings.review_count }} reviews)</span>
@@ -221,10 +251,10 @@
                   <span class="pf-prod-orig">{{ block.settings.compare_price }}</span>
                 {% endif %}
               </div>
-              <span class="pf-prod-cart-btn">🛒</span>
+              <a href="{{ card_url }}" class="pf-prod-cart-btn" aria-label="View product">🛒</a>
             </div>
           </div>
-        </a>
+        </div>
       {% endif %}
     {% endfor %}
   </div>
@@ -255,9 +285,10 @@
       "name": "Product card",
       "settings": [
         { "type": "product", "id": "product", "label": "Product (auto-fills title, price, image)" },
+        { "type": "image_picker", "id": "image", "label": "Image (if no product selected)" },
         { "type": "text", "id": "title", "label": "Title (if no product)", "default": "Luxury Leather Dog Collar" },
         { "type": "text", "id": "category", "label": "Category label", "default": "Dogs · Collars" },
-        { "type": "text", "id": "emoji", "label": "Emoji (if no product image)", "default": "🦮" },
+        { "type": "text", "id": "emoji", "label": "Emoji (fallback if no product/image)", "default": "🦮" },
         { "type": "text", "id": "price", "label": "Price (if no product)", "default": "$34.99" },
         { "type": "text", "id": "compare_price", "label": "Compare at price (leave blank to hide)", "default": "$49.99" },
         { "type": "text", "id": "stars", "label": "Star rating display", "default": "★★★★★" },

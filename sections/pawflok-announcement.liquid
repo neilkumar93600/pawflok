@@ -69,6 +69,13 @@
     color: {{ section.settings.accent_color }};
     font-weight: 700;
   }
+
+  .pf-marquee-icon-img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
 </style>
 
 <div class="pf-announce" role="marquee" aria-label="Announcements">
@@ -81,7 +88,9 @@
           {% if block.settings.show_pill and block.settings.pill_text != blank %}
             <span class="pf-marquee-pill">{{ block.settings.pill_text }}</span>
           {% endif %}
-          {% if block.settings.icon != blank %}
+          {% if block.settings.icon_image != blank %}
+            <img src="{{ block.settings.icon_image | image_url: width: 24 }}" alt="" class="pf-marquee-icon-img" width="24" height="24">
+          {% elsif block.settings.icon != blank %}
             <span style="font-size:14px">{{ block.settings.icon }}</span>
           {% endif %}
           <span>
@@ -99,7 +108,9 @@
           {% if block.settings.show_pill and block.settings.pill_text != blank %}
             <span class="pf-marquee-pill">{{ block.settings.pill_text }}</span>
           {% endif %}
-          {% if block.settings.icon != blank %}
+          {% if block.settings.icon_image != blank %}
+            <img src="{{ block.settings.icon_image | image_url: width: 24 }}" alt="" class="pf-marquee-icon-img" width="24" height="24">
+          {% elsif block.settings.icon != blank %}
             <span style="font-size:14px">{{ block.settings.icon }}</span>
           {% endif %}
           <span>
@@ -116,6 +127,9 @@
 {% schema %}
 {
   "name": "pawflok Marquee Bar",
+  "enabled_on": {
+    "groups": ["header"]
+  },
   "settings": [
     {
       "type": "color",
@@ -178,9 +192,14 @@
       "name": "Announcement",
       "settings": [
         {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Icon image (replaces emoji)"
+        },
+        {
           "type": "text",
           "id": "icon",
-          "label": "Emoji icon",
+          "label": "Emoji icon (fallback if no image)",
           "default": "🐾"
         },
         {

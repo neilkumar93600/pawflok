@@ -91,8 +91,8 @@
       {% if forloop.first %}{% assign is_tall = true %}{% endif %}
 
       <div class="pf-coll-item{% if is_tall %} pf-tall{% endif %}" {{ block.shopify_attributes }}>
-        <div class="pf-coll-bg" style="background-color: {{ block.settings.bg_color }};{% if block.settings.collection != blank and collections[block.settings.collection].image %} background-image: url('{{ collections[block.settings.collection].image | image_url: width: 800 }}');{% endif %}">
-          {% unless block.settings.collection != blank and collections[block.settings.collection].image %}
+        <div class="pf-coll-bg" style="background-color: {{ block.settings.bg_color }};{% if block.settings.collection != blank and collections[block.settings.collection].image %} background-image: url('{{ collections[block.settings.collection].image | image_url: width: 800 }}');{% elsif block.settings.image != blank %} background-image: url('{{ block.settings.image | image_url: width: 800 }}');{% endif %}">
+          {% unless block.settings.collection != blank and collections[block.settings.collection].image or block.settings.image != blank %}
             <span style="font-size:{% if is_tall %}120{% else %}80{% endif %}px">{{ block.settings.emoji }}</span>
           {% endunless %}
         </div>
@@ -130,6 +130,7 @@
       "name": "Collection card",
       "settings": [
         { "type": "collection", "id": "collection", "label": "Collection (auto-fills count + image)" },
+        { "type": "image_picker", "id": "image", "label": "Image (if no collection image)" },
         { "type": "text", "id": "title", "label": "Title (overrides collection name)", "default": "Dog Essentials" },
         { "type": "text", "id": "tag", "label": "Tag label", "default": "Collection" },
         { "type": "text", "id": "count", "label": "Product count (if no collection)", "default": "86 products" },

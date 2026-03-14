@@ -139,6 +139,7 @@
   gap: 20px;
 }
 .pf-hero-emoji { font-size: 130px; filter: drop-shadow(0 24px 48px rgba(0,0,0,.4)); }
+.pf-hero-img { max-width: 280px; height: auto; filter: drop-shadow(0 24px 48px rgba(0,0,0,.4)); }
 .pf-float-card {
   background: rgba(255,255,255,.1);
   border: 1px solid rgba(255,255,255,.15);
@@ -151,6 +152,7 @@
   max-width: 260px;
 }
 .pf-float-icon { font-size: 28px; }
+.pf-float-icon-img { width: 28px; height: 28px; object-fit: contain; }
 .pf-float-title { font-size: 13px; font-weight: 600; color: #fff; }
 .pf-float-sub { font-size: 11px; color: rgba(255,255,255,.5); margin-top: 1px; }
 .pf-hero-badge {
@@ -210,16 +212,20 @@
   <div class="pf-hero-right">
     <div class="pf-hero-pattern"></div>
     <div class="pf-hero-right-inner">
-      <div class="pf-hero-emoji">{{ section.settings.hero_emoji }}</div>
+      {% if section.settings.hero_image != blank %}
+        <img src="{{ section.settings.hero_image | image_url: width: 400 }}" alt="" class="pf-hero-img">
+      {% else %}
+        <div class="pf-hero-emoji">{{ section.settings.hero_emoji }}</div>
+      {% endif %}
       <div class="pf-float-card">
-        <div class="pf-float-icon">📦</div>
+        <div class="pf-float-icon">{% if section.settings.float1_image != blank %}<img src="{{ section.settings.float1_image | image_url: width: 48 }}" alt="" class="pf-float-icon-img">{% else %}📦{% endif %}</div>
         <div>
           <div class="pf-float-title">{{ section.settings.float1_title }}</div>
           <div class="pf-float-sub">{{ section.settings.float1_sub }}</div>
         </div>
       </div>
       <div class="pf-float-card">
-        <div class="pf-float-icon">🏆</div>
+        <div class="pf-float-icon">{% if section.settings.float2_image != blank %}<img src="{{ section.settings.float2_image | image_url: width: 48 }}" alt="" class="pf-float-icon-img">{% else %}🏆{% endif %}</div>
         <div>
           <div class="pf-float-title">{{ section.settings.float2_title }}</div>
           <div class="pf-float-sub">{{ section.settings.float2_sub }}</div>
@@ -250,9 +256,12 @@
     { "type": "url", "id": "btn2_url", "label": "Button 2 URL" },
     { "type": "text", "id": "rating", "label": "Rating text", "default": "4.9/5" },
     { "type": "text", "id": "review_count", "label": "Review count text", "default": "from 3,200+ verified reviews" },
-    { "type": "text", "id": "hero_emoji", "label": "Hero emoji", "default": "🐕" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image (replaces emoji)" },
+    { "type": "text", "id": "hero_emoji", "label": "Hero emoji (fallback)", "default": "🐕" },
+    { "type": "image_picker", "id": "float1_image", "label": "Float card 1 icon image" },
     { "type": "text", "id": "float1_title", "label": "Float card 1 title", "default": "Fast Dispatch" },
     { "type": "text", "id": "float1_sub", "label": "Float card 1 subtitle", "default": "Ships within 24 hours" },
+    { "type": "image_picker", "id": "float2_image", "label": "Float card 2 icon image" },
     { "type": "text", "id": "float2_title", "label": "Float card 2 title", "default": "#1 Rated Pet Store" },
     { "type": "text", "id": "float2_sub", "label": "Float card 2 subtitle", "default": "Best of 2025 Award" },
     { "type": "text", "id": "badge_num", "label": "Badge number", "default": "200+" },
